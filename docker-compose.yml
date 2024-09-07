@@ -19,8 +19,6 @@ services:
       - 81:80
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-      # PassFileも一緒に配置したかったが、下記を参考にしてもうまくいかなかった
-      # https://stackoverflow.com/questions/66578506/where-is-the-pgpass-file-in-pgadmin4-docker-container-when-this-file-is-mounted
       - ./config/servers.json:/pgadmin4/servers.json
     environment:
       PGADMIN_DEFAULT_EMAIL: user@example.com
