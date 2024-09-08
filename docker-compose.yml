@@ -1,7 +1,21 @@
 version: "3.8"
 
 services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: go.dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    tty: true
+    volumes:
+      - ./src:/go/src
+
   db:
+    container_name: db
     image: postgres:16
     ports:
       - "5432:5432"
