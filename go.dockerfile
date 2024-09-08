@@ -5,7 +5,9 @@ COPY ./src/ /go/src/
 WORKDIR /go/src/
 
 RUN go mod download && go mod tidy
+RUN go install github.com/air-verse/air@latest
 
-CMD ["go", "run", "main.go"]
+# CMD ["go", "run", "main.go"]
+CMD ["air"]
 
 EXPOSE 8080
