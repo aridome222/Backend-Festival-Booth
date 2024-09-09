@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  fes-booth-api:
+    container_name: fes-booth-api
+    build:
+      context: .
+      dockerfile: go.dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - fes-booth-db
+    tty: true
+    volumes:
+      - ./src:/go/src
+    networks:
+      - fes-booth-network
+
+  fes-booth-db:
+    container_name: fes-booth-db
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    # restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: fes-booth-db
+    volumes:
+      - fes-booth-db:/var/lib/postgresql/data
+    networks:
+      - fes-booth-network
+
+  fes-booth-pgadmin4:
+    image: dpage/pgadmin4:8.4
+    ports:
+      - 81:80
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ./config/servers.json:/pgadmin4/servers.json
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    depends_on:
+      - fes-booth-db
+
+volumes:
+  fes-booth-db:
+  pgadmin-data:
+
+networks:
+  fes-booth-network:
+    external: true
