@@ -13,6 +13,8 @@ services:
     tty: true
     volumes:
       - ./src:/go/src
+    networks:
+      - fes-booth-network
 
   fes-booth-db:
     container_name: fes-booth-db
@@ -26,6 +28,8 @@ services:
       POSTGRES_DB: fes-booth-db
     volumes:
       - fes-booth-db:/var/lib/postgresql/data
+    networks:
+      - fes-booth-network
 
   fes-booth-pgadmin4:
     image: dpage/pgadmin4:8.4
@@ -45,3 +49,7 @@ services:
 volumes:
   fes-booth-db:
   pgadmin-data:
+
+networks:
+  fes-booth-network:
+    external: true
