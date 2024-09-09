@@ -25,4 +25,11 @@ func (con SaveProductController) SaveProduct(ctx *gin.Context) {
 		return
 	}
 
+	savedProduct, err := con.uc.SaveProduct(input)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusCreated, savedProduct)
 }
