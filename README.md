@@ -9,13 +9,7 @@ Go をインストールしろ
 docker コンテナを起動
 
 ```
-docker compose up -d
-```
-
-docker コンテナを再起動 (ソースコード修正時など) air が効くなら要らない
-
-```
-docker compose restart
+docker compose up
 ```
 
 docker コンテナを閉じる
