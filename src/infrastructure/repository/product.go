@@ -25,5 +25,12 @@ func (repo ProductRepository) Save(product domain.Product) (domain.Product, erro
 }
 
 func (repo ProductRepository) FindByUser(userName string) (domain.Product, error) {
-	return domain.Product{}, nil
+	var product domain.Product
+
+	result := repo.db.Where("user_name = ?", userName).First(&product)
+	if result.Error != nil {
+		return domain.Product{}, result.Error
+	}
+
+	return product, nil
 }
