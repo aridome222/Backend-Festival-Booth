@@ -33,7 +33,9 @@ func main() {
 	} else {
 		println("connection is successful")
 	}
-	db.AutoMigrate(&User{})
+	if err := db.AutoMigrate(&User{}); err != nil {
+		panic("failed to migrate")
+	}
 
 	user := User{
 		Name:  "user1",
