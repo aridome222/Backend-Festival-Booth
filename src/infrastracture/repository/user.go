@@ -23,3 +23,12 @@ func (repo UserRepository) Find(page int, limit int) ([]domain.User, error) {
 	}
 	return users, nil
 }
+
+func (repo UserRepository) FindAll() ([]domain.User, error) {
+	var users []domain.User
+	result := repo.db.Find(&users)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return users, nil
+}
