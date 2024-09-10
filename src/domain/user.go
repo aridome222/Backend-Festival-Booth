@@ -11,6 +11,7 @@ type User struct {
 
 type UserRepository interface {
 	Save(User) (User, error)
+	Find(int, int) (User, error)
 }
 
 func NewUser(
