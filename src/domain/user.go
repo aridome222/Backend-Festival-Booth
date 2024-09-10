@@ -1,12 +1,12 @@
 package domain
 
 type User struct {
-	id           string
-	name         string
-	introduction string
-	iconNum      int
-	githubUrl    string
-	xUrl         string
+	id           string `gorm:"primary_key"`
+	name         string `gorm:"unique;not null"`
+	introduction string `gorm:"not null"`
+	iconNum      int    `gorm:"not null"`
+	githubUrl    string `gorm:"not null"`
+	xUrl         string `gorm:"not null"`
 }
 
 type UserRepository interface {
