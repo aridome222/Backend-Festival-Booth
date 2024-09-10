@@ -10,7 +10,7 @@ type User struct {
 }
 
 type UserRepository interface {
-	Save(User) (User, error)
+	// Save(User) (User, error)
 	Find(int, int) ([]User, error)
 	FindAll() ([]User, error)
 }
