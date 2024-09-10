@@ -25,3 +25,25 @@ func NewGetUserUseCase(repo domain.UserRepository) GetUserUseCase {
 		repo: repo,
 	}
 }
+
+func (uc GetUserUseCase) GetUser(input GetUserUseCaseInputDTO) ([]GetUserUseCaseOutputDTO, error) {
+	users, err := uc.repo.Find(input.Page, input.Limit)
+	if err != nil {
+		return nil, err
+	}
+
+	outputSlice := []GetUserUseCaseOutputDTO{}
+
+	for _, user := range users {
+		outputSlice = append(outputSlice, GetUserUseCaseOutputDTO{
+			user.ID(),
+			user.Name(),
+			user.Introduction(),
+			user.IconNum(),
+			user.GithubUrl(),
+			user.XUrl(),
+		})
+	}
+
+	return outputSlice, nil
+}
