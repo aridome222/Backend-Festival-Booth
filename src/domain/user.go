@@ -4,7 +4,7 @@ type User struct {
 	id           string
 	name         string
 	introduction string
-	iconNum      string
+	iconNum      int
 	githubUrl    string
 	xUrl         string
 }
@@ -13,7 +13,7 @@ func NewUser(
 	id string,
 	name string,
 	introduction string,
-	iconNum string,
+	iconNum int,
 	githubUrl string,
 	xUrl string,
 ) User {
@@ -25,4 +25,28 @@ func NewUser(
 		githubUrl:    githubUrl,
 		xUrl:         xUrl,
 	}
+}
+
+func (user User) ID() string {
+	return user.id
+}
+
+func (user User) Name() string {
+	return user.name
+}
+
+func (user User) Introduction() string {
+	return user.introduction
+}
+
+func (user User) IconNum() int {
+	return user.iconNum
+}
+
+func (user User) GithubUrl() string {
+	return user.githubUrl
+}
+
+func (user User) XUrl() string {
+	return user.xUrl
 }
