@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -13,6 +15,14 @@ type User struct {
 	Name  string
 	Email string
 }
+
+var (
+	dbHost     string
+	dbUser     string
+	dbPassword string
+	dbName     string
+	dbPort     string
+)
 
 func main() {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s",
@@ -50,4 +60,16 @@ func main() {
 		})
 	})
 	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
+}
+
+func loadEnv() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("fail to load .env file")
+	}
+	dbHost = os.Getenv("DB_HOST")
+	dbUser = os.Getenv("MYSQL_USER")
+	dbPassword = os.Getenv("MYSQL_PASSWORD")
+	dbName = os.Getenv("MYSQL_DATABASE")
+	dbPort = os.Getenv("DB_PORT")
 }
