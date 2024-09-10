@@ -35,18 +35,13 @@ func main() {
 	} else {
 		println("connection is successful")
 	}
+
 	if err := db.AutoMigrate(&User{}); err != nil {
 		panic("failed to migrate")
 	}
 
-	user := User{
-		Name:  "user1",
-		Email: "user1@user.com",
-	}
-
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
-		db.Create(&user)
 		c.JSON(200, gin.H{
 			"message": "pong",
 		})
