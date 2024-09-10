@@ -2,7 +2,11 @@
 
 ## 環境構築
 
-Go をインストールしろよ
+1. GoおよびDockerをインストール
+2. `git clone https://github.com/aridome222/Backend-Festival-Booth.git`
+3. `docker network create fes-booth-network`
+4. `docker compose build`
+
 
 ## 開発の流れ
 
