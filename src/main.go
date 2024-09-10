@@ -25,19 +25,11 @@ var (
 )
 
 func main() {
+	loadEnv()
+
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s",
-		"fes-booth-db", "user", "password", "fes-booth-db", "5432")
+		dbHost, dbUser, dbPassword, dbName, dbPort)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	// var count = 0
-	// for count < 10 {
-	// 	if db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{}); err != nil {
-	// 		time.Sleep(time.Second * 5)
-	// 		count++
-	// 		log.Printf("retry... count:%v\n", count)
-	// 		continue
-	// 	}
-	// 	break
-	// }
 	if err != nil {
 		panic("failed to connect database")
 	} else {
@@ -68,8 +60,8 @@ func loadEnv() {
 		fmt.Println("fail to load .env file")
 	}
 	dbHost = os.Getenv("DB_HOST")
-	dbUser = os.Getenv("MYSQL_USER")
-	dbPassword = os.Getenv("MYSQL_PASSWORD")
-	dbName = os.Getenv("MYSQL_DATABASE")
+	dbUser = os.Getenv("DB_USER")
+	dbPassword = os.Getenv("DB_PASSWORD")
+	dbName = os.Getenv("DB_NAME")
 	dbPort = os.Getenv("DB_PORT")
 }
