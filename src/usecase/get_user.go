@@ -44,12 +44,12 @@ func (uc GetUserUseCase) GetUser(input GetUserUseCaseInputDTO) ([]GetUserUseCase
 
 	for _, user := range users {
 		outputSlice = append(outputSlice, GetUserUseCaseOutputDTO{
-			user.ID(),
-			user.Name(),
-			user.Introduction(),
-			user.IconNum(),
-			user.GithubUrl(),
-			user.XUrl(),
+			user.ID,
+			user.Name,
+			user.Introduction,
+			user.IconNum,
+			user.GithubUrl,
+			user.XUrl,
 		})
 	}
 
