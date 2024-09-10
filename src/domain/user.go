@@ -9,6 +9,10 @@ type User struct {
 	xUrl         string
 }
 
+type UserRepository interface {
+	Save(User) (User, error)
+}
+
 func NewUser(
 	id string,
 	name string,
