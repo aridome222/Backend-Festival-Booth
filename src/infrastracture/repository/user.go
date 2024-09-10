@@ -14,3 +14,12 @@ func NewUserRepository(db *gorm.DB) domain.UserRepository {
 		db: db,
 	}
 }
+
+func (repo UserRepository) Find(page int, limit int) ([]domain.User, error) {
+	var users []domain.User
+	result := repo.db.Limit(limit).Offset(page * limit).Find(&users)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return users, nil
+}
