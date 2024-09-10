@@ -30,7 +30,7 @@ func (uc GetUserUseCase) GetUser(input GetUserUseCaseInputDTO) ([]GetUserUseCase
 	var users []domain.User
 	var err error
 
-	if input.Page < 0 || input.Limit <= 0 {
+	if input.Page < 0 || input.Limit < 0 {
 		users, err = uc.repo.FindAll()
 	} else {
 		users, err = uc.repo.Find(input.Page, input.Limit)
