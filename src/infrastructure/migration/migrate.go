@@ -8,7 +8,7 @@ import (
 func Migrate() {
 	db := infrastructure.ConnectDB()
 
-	if err := db.AutoMigrate(&domain.Product{}); err != nil {
+	if err := db.AutoMigrate(&domain.Product{}, &domain.User{}); err != nil {
 		panic("failed to migrate")
 	}
 }
