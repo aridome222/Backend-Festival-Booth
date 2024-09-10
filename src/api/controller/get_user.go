@@ -20,9 +20,19 @@ func NewGetUserController(uc usecase.GetUserUseCase) GetUserController {
 
 func (con GetUserController) GetUser(ctx *gin.Context) {
 	var input usecase.GetUserUseCaseInputDTO
+	var err error
 
-	input.Page, _ = strconv.Atoi(ctx.DefaultQuery("page", "-1"))
-	input.Limit, _ = strconv.Atoi(ctx.DefaultQuery("limit", "-1"))
+	input.Page, err = strconv.Atoi(ctx.DefaultQuery("page", "-1"))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	input.Limit, err = strconv.Atoi(ctx.DefaultQuery("limit", "-1"))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
 	output, err := con.uc.GetUser(input)
 
