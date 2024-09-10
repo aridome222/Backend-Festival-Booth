@@ -12,7 +12,7 @@ type SaveProductUseCase struct {
 type SaveProductInputDTO struct {
 	UserName    string `json:"user_name" bindng:"required:min=1:max=20"`
 	Url         string `json:"url" bindng:"required:min=1:max=100"`
-	Description string `json:"description" bindng:"required:min=1:max=200"`
+	Description string `json:"description" bindng:"min=1:max=200"`
 }
 
 type SaveProductOutputDTO struct {

@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/aridome222/Backend-Festival-Booth/api/controller"
+	"github.com/aridome222/Backend-Festival-Booth/domain"
 	"github.com/aridome222/Backend-Festival-Booth/infrastructure/repository"
 	"github.com/aridome222/Backend-Festival-Booth/usecase"
 	"github.com/gin-gonic/gin"
@@ -12,12 +13,6 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
-
-type User struct {
-	gorm.Model
-	Name  string
-	Email string
-}
 
 var (
 	dbHost     string
@@ -39,7 +34,7 @@ func main() {
 		println("connection is successful")
 	}
 
-	if err := db.AutoMigrate(&User{}); err != nil {
+	if err := db.AutoMigrate(&domain.Product{}); err != nil {
 		panic("failed to migrate")
 	}
 
