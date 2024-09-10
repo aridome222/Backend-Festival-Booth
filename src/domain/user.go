@@ -1,12 +1,12 @@
 package domain
 
 type User struct {
-	id           string `gorm:"primary_key"`
-	name         string `gorm:"unique;not null"`
-	introduction string `gorm:"not null"`
-	iconNum      int    `gorm:"not null"`
-	githubUrl    string `gorm:"not null"`
-	xUrl         string `gorm:"not null"`
+	ID           string `gorm:"primary_key"`
+	Name         string `gorm:"unique;not null"`
+	Introduction string `gorm:"not null"`
+	IconNum      int    `gorm:"not null"`
+	GithubUrl    string
+	XUrl         string
 }
 
 type UserRepository interface {
@@ -24,35 +24,35 @@ func NewUser(
 	xUrl string,
 ) User {
 	return User{
-		id:           id,
-		name:         name,
-		introduction: introduction,
-		iconNum:      iconNum,
-		githubUrl:    githubUrl,
-		xUrl:         xUrl,
+		ID:           id,
+		Name:         name,
+		Introduction: introduction,
+		IconNum:      iconNum,
+		GithubUrl:    githubUrl,
+		XUrl:         xUrl,
 	}
 }
 
-func (user User) ID() string {
-	return user.id
-}
+// func (user User) ID() string {
+// 	return user.id
+// }
 
-func (user User) Name() string {
-	return user.name
-}
+// func (user User) Name() string {
+// 	return user.name
+// }
 
-func (user User) Introduction() string {
-	return user.introduction
-}
+// func (user User) Introduction() string {
+// 	return user.introduction
+// }
 
-func (user User) IconNum() int {
-	return user.iconNum
-}
+// func (user User) IconNum() int {
+// 	return user.iconNum
+// }
 
-func (user User) GithubUrl() string {
-	return user.githubUrl
-}
+// func (user User) GithubUrl() string {
+// 	return user.githubUrl
+// }
 
-func (user User) XUrl() string {
-	return user.xUrl
-}
+// func (user User) XUrl() string {
+// 	return user.xUrl
+// }
