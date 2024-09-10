@@ -1,10 +1,10 @@
 package domain
 
 type Product struct {
-	productID   string `gorm:"primary_key"`
-	userName    string `gorm:"not null"`
-	url         string `gorm:"not null"`
-	description string
+	ProductID   string `gorm:"primary_key"`
+	UserName    string `gorm:"not null"`
+	Url         string `gorm:"not null"`
+	Description string
 }
 
 type ProductRepository interface {
@@ -14,25 +14,25 @@ type ProductRepository interface {
 
 func NewProduct(id string, userName string, url string, description string) Product {
 	return Product{
-		productID:   id,
-		userName:    userName,
-		url:         url,
-		description: description,
+		ProductID:   id,
+		UserName:    userName,
+		Url:         url,
+		Description: description,
 	}
 }
 
-func (p Product) ProductID() string {
-	return p.productID
-}
+// func (p Product) ProductID() string {
+// 	return p.productID
+// }
 
-func (p Product) UserName() string {
-	return p.userName
-}
+// func (p Product) UserName() string {
+// 	return p.userName
+// }
 
-func (p Product) Url() string {
-	return p.url
-}
+// func (p Product) Url() string {
+// 	return p.url
+// }
 
-func (p Product) Description() string {
-	return p.description
-}
+// func (p Product) Description() string {
+// 	return p.description
+// }

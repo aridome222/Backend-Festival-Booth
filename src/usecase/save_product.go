@@ -38,7 +38,7 @@ func (uc SaveProductUseCase) SaveProduct(input SaveProductInputDTO) (SaveProduct
 	if err != nil {
 		product = domain.NewProduct(ulid.Make().String(), input.UserName, input.Url, input.Description)
 	} else {
-		product = domain.NewProduct(product.ProductID(), input.UserName, input.Url, input.Description)
+		product = domain.NewProduct(product.ProductID, input.UserName, input.Url, input.Description)
 	}
 
 	product, err = uc.repo.Save(product)
@@ -47,9 +47,9 @@ func (uc SaveProductUseCase) SaveProduct(input SaveProductInputDTO) (SaveProduct
 	}
 
 	return SaveProductOutputDTO{
-		ProductID:   product.ProductID(),
-		UserName:    product.UserName(),
-		Url:         product.Url(),
-		Description: product.Description(),
+		ProductID:   product.ProductID,
+		UserName:    product.UserName,
+		Url:         product.Url,
+		Description: product.Description,
 	}, nil
 }
