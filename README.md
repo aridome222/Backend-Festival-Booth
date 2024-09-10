@@ -21,3 +21,13 @@ docker コンテナを閉じる
 ```
 docker compose down
 ```
+
+APIサーバは `localhost:8080` , PgAdminは `localhost:81` で立ち上がる
+
+## 技術スタック
+- Go
+- Gin
+- Gorm
+- PostgreSQL
+- PgAdmin
+- Docker
