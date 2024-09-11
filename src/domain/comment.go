@@ -7,6 +7,9 @@ type Comment struct {
 	Message   string `gorm:"not null"`
 }
 
+type CommentRepository interface {
+}
+
 func NewComment(
 	id string,
 	productID string,
