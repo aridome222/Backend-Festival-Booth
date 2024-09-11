@@ -8,18 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type GetUserController struct {
-	uc usecase.GetUserUseCase
+type GetProfileController struct {
+	uc usecase.GetProfileUseCase
 }
 
-func NewGetUserController(uc usecase.GetUserUseCase) GetUserController {
-	return GetUserController{
+func NewGetProfileController(uc usecase.GetProfileUseCase) GetProfileController {
+	return GetProfileController{
 		uc: uc,
 	}
 }
 
-func (con GetUserController) GetUser(ctx *gin.Context) {
-	var input usecase.GetUserUseCaseInputDTO
+func (con GetProfileController) GetProfile(ctx *gin.Context) {
+	var input usecase.GetProfileUseCaseInputDTO
 	var err error
 
 	input.Page, err = strconv.Atoi(ctx.DefaultQuery("page", "-1"))
@@ -34,7 +34,7 @@ func (con GetUserController) GetUser(ctx *gin.Context) {
 		return
 	}
 
-	output, err := con.uc.GetUser(input)
+	output, err := con.uc.GetProfile(input)
 
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
