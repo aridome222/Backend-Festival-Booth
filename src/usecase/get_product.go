@@ -12,6 +12,7 @@ type GetProductUseCaseInputDTO struct {
 
 type GetProductUseCaseOutputDTO struct {
 	ID          string `json:"id"`
+	Title       string `json:"title"`
 	UserName    string `json:"user_name"`
 	Url         string `json:"url"`
 	Description string `json:"description"`
@@ -34,6 +35,7 @@ func (uc GetProductUseCase) GetProduct(input GetProductUseCaseInputDTO) (GetProd
 
 	return GetProductUseCaseOutputDTO{
 		product.ID,
+		product.Title,
 		product.UserName,
 		product.Url,
 		product.Description,
