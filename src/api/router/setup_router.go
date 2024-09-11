@@ -33,7 +33,7 @@ func SetupRouter(db *gorm.DB) {
 
 	// save comment
 	commentRepository := repository.NewCommentRepository(db)
-	saveCommentUseCase := usecase.NewSaveCommentUseCase(commentRepository)
+	saveCommentUseCase := usecase.NewSaveCommentUseCase(commentRepository, productRepository)
 	saveCommentController := controller.NewSaveCommentController(saveCommentUseCase)
 
 	r := gin.Default()
