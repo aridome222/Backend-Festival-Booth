@@ -10,13 +10,13 @@ type SaveProductUseCase struct {
 }
 
 type SaveProductInputDTO struct {
-	UserName    string `json:"user_name" bindng:"required:min=1:max=20"`
-	Url         string `json:"url" bindng:"required:min=1:max=100"`
-	Description string `json:"description" bindng:"min=1:max=200"`
+	UserName    string `json:"user_name" binding:"required,min=1,max=20"`
+	Url         string `json:"url" binding:"required,min=1,max=100"`
+	Description string `json:"description" binding:"min=1,max=200"`
 }
 
 type SaveProductOutputDTO struct {
-	ProductID   string `json:"product_id"`
+	ID          string `json:"id"`
 	UserName    string `json:"user_name"`
 	Url         string `json:"url"`
 	Description string `json:"description"`
@@ -38,7 +38,7 @@ func (uc SaveProductUseCase) SaveProduct(input SaveProductInputDTO) (SaveProduct
 	if err != nil {
 		product = domain.NewProduct(ulid.Make().String(), input.UserName, input.Url, input.Description)
 	} else {
-		product = domain.NewProduct(product.ProductID, input.UserName, input.Url, input.Description)
+		product = domain.NewProduct(product.ID, input.UserName, input.Url, input.Description)
 	}
 
 	product, err = uc.repo.Save(product)
@@ -47,7 +47,7 @@ func (uc SaveProductUseCase) SaveProduct(input SaveProductInputDTO) (SaveProduct
 	}
 
 	return SaveProductOutputDTO{
-		ProductID:   product.ProductID,
+		ID:          product.ID,
 		UserName:    product.UserName,
 		Url:         product.Url,
 		Description: product.Description,

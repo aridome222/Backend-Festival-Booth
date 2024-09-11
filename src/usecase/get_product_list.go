@@ -14,7 +14,7 @@ type GetProductListUseCaseInputDTO struct {
 }
 
 type GetProductListUseCaseOutputDTO struct {
-	ProductID   string `json:"product_id"`
+	ID          string `json:"id"`
 	UserName    string `json:"user_name"`
 	Url         string `json:"url"`
 	Description string `json:"description"`
@@ -44,7 +44,7 @@ func (uc GetProductListUseCase) GetProductList(input GetProductListUseCaseInputD
 
 	for _, product := range products {
 		outputSlice = append(outputSlice, GetProductListUseCaseOutputDTO{
-			product.ProductID,
+			product.ID,
 			product.UserName,
 			product.Url,
 			product.Description,
