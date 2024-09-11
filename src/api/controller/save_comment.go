@@ -26,6 +26,7 @@ func (con SaveCommentController) SaveComment(ctx *gin.Context) {
 	}
 
 	savedComment, err := con.uc.SaveComment(input)
+	// TODO: errがproductIDが一致するproductが存在しない場合は、400で返したい
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
