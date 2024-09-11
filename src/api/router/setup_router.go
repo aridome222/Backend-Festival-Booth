@@ -18,8 +18,12 @@ func SetupRouter(db *gorm.DB) {
 	getProductUseCase := usecase.NewGetProductUseCase(productRepository)
 	getProductController := controller.NewGetProductController(getProductUseCase)
 
-	// get profiles
+	// save profile
 	profileRepository := repository.NewProfileRepository(db)
+	saveProfileUseCase := usecase.NewSaveProfileUseCase(profileRepository)
+	saveProfileController := controller.NewSaveProfileController(saveProfileUseCase)
+
+	// get profiles
 	getProfileUseCase := usecase.NewGetProfileUseCase(profileRepository)
 	getProfileController := controller.NewGetProfileController(getProfileUseCase)
 
@@ -28,6 +32,7 @@ func SetupRouter(db *gorm.DB) {
 
 	r.POST("/products", saveProductController.SaveProduct)
 	r.GET("/products", getProductController.GetProduct)
+	r.POST("/profiles", saveProfileController.SaveProfile)
 	r.GET("/profiles", getProfileController.GetProfile)
 
 	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
