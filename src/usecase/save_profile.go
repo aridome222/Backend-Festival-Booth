@@ -10,8 +10,13 @@ type SaveProfileUsecase struct {
 }
 
 type SaveProfileInputDTO struct {
-	Name         string `json:"name" binding:"required:min=1:max=20"`
-	Introduction string `json:"introduction" binding:"required:min=1:max=200"`
+	// Name         string `json:"name"`
+	// Introduction string `json:"introduction"`
+	// IconNum      int    `json:"icon_num"`
+	// GithubUrl    string `json:"github_url"`
+	// XUrl         string `json:"x_url"`
+	Name         string `json:"name" binding:"required,min=1,max=20"`
+	Introduction string `json:"introduction" binding:"required,min=1,max=200"`
 	IconNum      int    `json:"icon_num" binding:"required"`
 	GithubUrl    string `json:"github_url"`
 	XUrl         string `json:"x_url"`
