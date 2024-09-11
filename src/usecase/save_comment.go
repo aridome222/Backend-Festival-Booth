@@ -6,7 +6,8 @@ import (
 )
 
 type SaveCommentUseCase struct {
-	repo domain.CommentRepository
+	repo        domain.CommentRepository
+	productRepo domain.ProductRepository
 }
 
 type SaveCommentUseCaseInputDTO struct {
@@ -20,7 +21,10 @@ type SaveCommentUseCaseOutputDTO struct {
 	Message   string `json:"message"`
 }
 
-func NewSaveCommentUseCase(repo domain.CommentRepository) SaveCommentUseCase {
+func NewSaveCommentUseCase(
+	repo domain.CommentRepository,
+	productRepo domain.ProductRepository,
+) SaveCommentUseCase {
 	return SaveCommentUseCase{
 		repo: repo,
 	}
