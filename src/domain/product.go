@@ -1,7 +1,7 @@
 package domain
 
 type Product struct {
-	ProductID   string `gorm:"primary_key"`
+	ID          string `gorm:"primary_key"`
 	UserName    string `gorm:"not null"`
 	Url         string `gorm:"not null"`
 	Description string
@@ -22,7 +22,7 @@ func NewProduct(
 	description string,
 ) Product {
 	return Product{
-		ProductID:   id,
+		ID:          id,
 		UserName:    userName,
 		Url:         url,
 		Description: description,
