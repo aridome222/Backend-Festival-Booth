@@ -11,7 +11,7 @@ type SaveCommentController struct {
 	uc usecase.SaveCommentUseCase
 }
 
-func NewCommentController(uc usecase.SaveCommentUseCase) SaveCommentController {
+func NewSaveCommentController(uc usecase.SaveCommentUseCase) SaveCommentController {
 	return SaveCommentController{
 		uc: uc,
 	}
