@@ -3,7 +3,7 @@ package usecase
 import "github.com/aridome222/Backend-Festival-Booth/domain"
 
 type GetProductUseCase struct {
-	repo domain.Product
+	repo domain.ProductRepository
 }
 
 type GetProductUseCaseInputDTO struct {
@@ -17,8 +17,25 @@ type GetProductUseCaseOutputDTO struct {
 	Description string `json:"description"`
 }
 
-func NewGetProductUseCase(repo domain.Product) GetProductUseCase {
+func NewGetProductUseCase(repo domain.ProductRepository) GetProductUseCase {
 	return GetProductUseCase{
 		repo: repo,
 	}
+}
+
+func (uc GetProductUseCase) GetProduct(input GetProductUseCaseInputDTO) (GetProductUseCaseOutputDTO, error) {
+	var product domain.Product
+	var err error
+
+	product, err = uc.repo.FindByUser(input.UserName)
+	if err != nil {
+		return GetProductUseCaseOutputDTO{}, err
+	}
+
+	return GetProductUseCaseOutputDTO{
+		product.ProductID,
+		product.UserName,
+		product.Url,
+		product.Description,
+	}, nil
 }
