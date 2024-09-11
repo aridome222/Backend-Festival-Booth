@@ -26,7 +26,7 @@ type SaveProfileOutputDTO struct {
 	XUrl         string `json:"x_url"`
 }
 
-func NewSaveProfileUsecase(repo domain.ProfileRepository) SaveProfileUsecase {
+func NewSaveProfileUseCase(repo domain.ProfileRepository) SaveProfileUsecase {
 	return SaveProfileUsecase{
 		repo: repo,
 	}
