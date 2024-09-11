@@ -32,3 +32,14 @@ func (repo ProfileRepository) FindAll() ([]domain.Profile, error) {
 	}
 	return profiles, nil
 }
+
+func (repo ProfileRepository) FindByUser(userName string) (domain.Profile, error) {
+	var profile domain.Profile
+
+	result := repo.db.Where("name = ?", userName).First(&profile)
+	if result.Error != nil {
+		return domain.Profile{}, result.Error
+	}
+
+	return profile, nil
+}

@@ -13,6 +13,7 @@ type ProfileRepository interface {
 	// Save(Profile) (Profile, error)
 	Find(int, int) ([]Profile, error)
 	FindAll() ([]Profile, error)
+	FindByUser(string) (Profile, error)
 }
 
 func NewProfile(
