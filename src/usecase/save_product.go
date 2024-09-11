@@ -10,9 +10,9 @@ type SaveProductUseCase struct {
 }
 
 type SaveProductInputDTO struct {
-	UserName    string `json:"user_name" binding:"required:min=1:max=20"`
-	Url         string `json:"url" binding:"required:min=1:max=100"`
-	Description string `json:"description" binding:"min=1:max=200"`
+	UserName    string `json:"user_name" binding:"required,min=1,max=20"`
+	Url         string `json:"url" binding:"required,min=1,max=100"`
+	Description string `json:"description" binding:"min=1,max=200"`
 }
 
 type SaveProductOutputDTO struct {
