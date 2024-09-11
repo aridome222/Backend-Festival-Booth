@@ -33,6 +33,15 @@ func (repo ProductRepository) Find(page int, limit int) ([]domain.Product, error
 	return products, nil
 }
 
+func (repo ProductRepository) FindAll() ([]domain.Product, error) {
+	var products []domain.Product
+	result := repo.db.Find(&products)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return products, nil
+}
+
 func (repo ProductRepository) FindByUser(userName string) (domain.Product, error) {
 	var product domain.Product
 
