@@ -11,6 +11,7 @@ type ProductRepository interface {
 	Save(Product) (Product, error)
 	Find(int, int) ([]Product, error)
 	FindAll() ([]Product, error)
+	FindByID(string) (Product, error)
 	FindByUser(string) (Product, error)
 }
 
