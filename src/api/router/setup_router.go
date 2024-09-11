@@ -22,8 +22,12 @@ func SetupRouter(db *gorm.DB) {
 	getProductUseCase := usecase.NewGetProductUseCase(productRepository)
 	getProductController := controller.NewGetProductController(getProductUseCase)
 
-	// get profiles
+	// save profile
 	profileRepository := repository.NewProfileRepository(db)
+	saveProfileUseCase := usecase.NewSaveProfileUseCase(profileRepository)
+	saveProfileController := controller.NewSaveProfileController(saveProfileUseCase)
+
+	// get profiles
 	getProfileListUseCase := usecase.NewGetProfileListUseCase(profileRepository)
 	getProfileListController := controller.NewGetProfileListController(getProfileListUseCase)
 
@@ -40,6 +44,7 @@ func SetupRouter(db *gorm.DB) {
 	// TODO: cors設定を追記
 
 	r.POST("/products", saveProductController.SaveProduct)
+	r.POST("/profiles", saveProfileController.SaveProfile)
 	r.GET("/products", getProductListController.GetProductList)
 	r.GET("/products/:user_name", getProductController.GetProduct)
 	r.GET("/profiles", getProfileListController.GetProfileList)

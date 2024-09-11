@@ -3,7 +3,7 @@ package domain
 type Product struct {
 	ID          string `gorm:"primary_key"`
 	Title       string `gorm:"not null"`
-	UserName    string `gorm:"not null"`
+	UserName    string `gorm:"unique;not null"`
 	Url         string `gorm:"not null"`
 	Description string
 }
