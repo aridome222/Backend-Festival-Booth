@@ -2,16 +2,16 @@ package usecase
 
 import "github.com/aridome222/Backend-Festival-Booth/domain"
 
-type GetProfileUseCase struct {
+type GetProfileListUseCase struct {
 	repo domain.ProfileRepository
 }
 
-type GetProfileUseCaseInputDTO struct {
+type GetProfileListUseCaseInputDTO struct {
 	Page  int
 	Limit int
 }
 
-type GetProfileUseCaseOutputDTO struct {
+type GetProfileListUseCaseOutputDTO struct {
 	ID           string `json:"id"`
 	Name         string `json:"name"`
 	Introduction string `json:"introduction"`
@@ -20,13 +20,13 @@ type GetProfileUseCaseOutputDTO struct {
 	XUrl         string `json:"x_url"`
 }
 
-func NewGetProfileUseCase(repo domain.ProfileRepository) GetProfileUseCase {
-	return GetProfileUseCase{
+func NewGetProfileListUseCase(repo domain.ProfileRepository) GetProfileListUseCase {
+	return GetProfileListUseCase{
 		repo: repo,
 	}
 }
 
-func (uc GetProfileUseCase) GetProfile(input GetProfileUseCaseInputDTO) ([]GetProfileUseCaseOutputDTO, error) {
+func (uc GetProfileListUseCase) GetProfileList(input GetProfileListUseCaseInputDTO) ([]GetProfileListUseCaseOutputDTO, error) {
 	var profiles []domain.Profile
 	var err error
 
@@ -40,10 +40,10 @@ func (uc GetProfileUseCase) GetProfile(input GetProfileUseCaseInputDTO) ([]GetPr
 		return nil, err
 	}
 
-	outputSlice := []GetProfileUseCaseOutputDTO{}
+	outputSlice := []GetProfileListUseCaseOutputDTO{}
 
 	for _, profile := range profiles {
-		outputSlice = append(outputSlice, GetProfileUseCaseOutputDTO{
+		outputSlice = append(outputSlice, GetProfileListUseCaseOutputDTO{
 			profile.ID,
 			profile.Name,
 			profile.Introduction,
