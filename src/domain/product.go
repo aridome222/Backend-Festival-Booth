@@ -9,10 +9,17 @@ type Product struct {
 
 type ProductRepository interface {
 	Save(Product) (Product, error)
+	Find(int, int) ([]Product, error)
+	FindAll() ([]Product, error)
 	FindByUser(string) (Product, error)
 }
 
-func NewProduct(id string, userName string, url string, description string) Product {
+func NewProduct(
+	id string,
+	userName string,
+	url string,
+	description string,
+) Product {
 	return Product{
 		ProductID:   id,
 		UserName:    userName,
