@@ -20,7 +20,7 @@ type SaveCommentUseCaseOutputDTO struct {
 	Message   string `json:"message"`
 }
 
-func NewCommentUseCase(repo domain.CommentRepository) SaveCommentUseCase {
+func NewSaveCommentUseCase(repo domain.CommentRepository) SaveCommentUseCase {
 	return SaveCommentUseCase{
 		repo: repo,
 	}
