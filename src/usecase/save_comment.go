@@ -26,7 +26,8 @@ func NewSaveCommentUseCase(
 	productRepo domain.ProductRepository,
 ) SaveCommentUseCase {
 	return SaveCommentUseCase{
-		repo: repo,
+		repo:        repo,
+		productRepo: productRepo,
 	}
 }
 
