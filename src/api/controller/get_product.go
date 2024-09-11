@@ -2,7 +2,6 @@ package controller
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/aridome222/Backend-Festival-Booth/usecase"
 	"github.com/gin-gonic/gin"
@@ -22,22 +21,12 @@ func (con GetProductController) GetProduct(ctx *gin.Context) {
 	var input usecase.GetProductUseCaseInputDTO
 	var err error
 
-	input.Page, err = strconv.Atoi(ctx.DefaultQuery("page", "-1"))
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	input.Limit, err = strconv.Atoi(ctx.DefaultQuery("limit", "-1"))
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+	input.UserName = ctx.Param("user_name")
 
 	output, err := con.uc.GetProduct(input)
 
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
 
