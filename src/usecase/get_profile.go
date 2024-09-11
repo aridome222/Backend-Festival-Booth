@@ -24,3 +24,22 @@ func NewGetProfileUseCase(repo domain.ProfileRepository) GetProfileUseCase {
 		repo: repo,
 	}
 }
+
+func (uc GetProfileUseCase) GetProfile(input GetProfileUseCaseInputDTO) (GetProfileUseCaseOutputDTO, error) {
+	var profile domain.Profile
+	var err error
+
+	profile, err = uc.repo.FindByUser(input.UserName)
+	if err != nil {
+		return GetProfileUseCaseOutputDTO{}, err
+	}
+
+	return GetProfileUseCaseOutputDTO{
+		profile.ID,
+		profile.Name,
+		profile.Introduction,
+		profile.IconNum,
+		profile.GithubUrl,
+		profile.XUrl,
+	}, nil
+}
