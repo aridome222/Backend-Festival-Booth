@@ -2,6 +2,7 @@ package domain
 
 type Product struct {
 	ID          string `gorm:"primary_key"`
+	Title       string `gorm:"not null"`
 	UserName    string `gorm:"not null"`
 	Url         string `gorm:"not null"`
 	Description string
@@ -17,12 +18,14 @@ type ProductRepository interface {
 
 func NewProduct(
 	id string,
+	title string,
 	userName string,
 	url string,
 	description string,
 ) Product {
 	return Product{
 		ID:          id,
+		Title:       title,
 		UserName:    userName,
 		Url:         url,
 		Description: description,
