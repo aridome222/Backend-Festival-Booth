@@ -14,16 +14,16 @@ func SetupRouter(db *gorm.DB) {
 	saveProductUseCase := usecase.NewSaveProductUseCase(productRepository)
 	saveProductController := controller.NewSaveProductController(saveProductUseCase)
 
-	// get users
-	userRepository := repository.NewUserRepository(db)
-	getUserUseCase := usecase.NewGetUserUseCase(userRepository)
-	getUserController := controller.NewGetUserController(getUserUseCase)
+	// get profiles
+	profileRepository := repository.NewProfileRepository(db)
+	getProfileUseCase := usecase.NewGetProfileUseCase(profileRepository)
+	getProfileController := controller.NewGetProfileController(getProfileUseCase)
 
 	r := gin.Default()
 	// TODO: cors設定を追記
 
 	r.POST("/products", saveProductController.SaveProduct)
-	r.GET("/users", getUserController.GetUser)
+	r.GET("/profiles", getProfileController.GetProfile)
 
 	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
 }
