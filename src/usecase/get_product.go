@@ -2,11 +2,10 @@ package usecase
 
 import (
 	"github.com/aridome222/Backend-Festival-Booth/domain"
-	"github.com/aridome222/Backend-Festival-Booth/infrastructure/repository"
 )
 
 type GetProductUseCase struct {
-	repo repository.ProductRepository
+	repo domain.ProductRepository
 }
 
 type GetProductUseCaseInputDTO struct {
@@ -21,7 +20,7 @@ type GetProductUseCaseOutputDTO struct {
 	Description string `json:"description"`
 }
 
-func NewGetProductUseCase(repo repository.ProductRepository) GetProductUseCase {
+func NewGetProductUseCase(repo domain.ProductRepository) GetProductUseCase {
 	return GetProductUseCase{
 		repo: repo,
 	}
