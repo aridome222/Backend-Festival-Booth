@@ -31,9 +31,15 @@ func NewSaveCommentUseCase(
 }
 
 func (uc SaveCommentUseCase) SaveComment(input SaveCommentUseCaseInputDTO) (SaveCommentUseCaseOutputDTO, error) {
+	_, err := uc.productRepo.FindByID(input.ProductID)
+	// TODO: productが見つからなかった場合以外のエラーハンドリングを記述
+	if err != nil {
+		return SaveCommentUseCaseOutputDTO{}, err
+	}
+
 	comment := domain.NewComment(ulid.Make().String(), input.ProductID, input.Message)
 
-	comment, err := uc.repo.Save(comment)
+	comment, err = uc.repo.Save(comment)
 	if err != nil {
 		return SaveCommentUseCaseOutputDTO{}, err
 	}
