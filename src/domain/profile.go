@@ -10,7 +10,7 @@ type Profile struct {
 }
 
 type ProfileRepository interface {
-	// Save(Profile) (Profile, error)
+	Save(Profile) (Profile, error)
 	Find(int, int) ([]Profile, error)
 	FindAll() ([]Profile, error)
 }
