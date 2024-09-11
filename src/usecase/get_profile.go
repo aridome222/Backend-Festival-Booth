@@ -7,8 +7,7 @@ type GetProfileUseCase struct {
 }
 
 type GetProfileUseCaseInputDTO struct {
-	Page  int
-	Limit int
+	UserName string
 }
 
 type GetProfileUseCaseOutputDTO struct {
@@ -26,32 +25,21 @@ func NewGetProfileUseCase(repo domain.ProfileRepository) GetProfileUseCase {
 	}
 }
 
-func (uc GetProfileUseCase) GetProfile(input GetProfileUseCaseInputDTO) ([]GetProfileUseCaseOutputDTO, error) {
-	var profiles []domain.Profile
+func (uc GetProfileUseCase) GetProfile(input GetProfileUseCaseInputDTO) (GetProfileUseCaseOutputDTO, error) {
+	var profile domain.Profile
 	var err error
 
-	if input.Page < 0 || input.Limit < 0 {
-		profiles, err = uc.repo.FindAll()
-	} else {
-		profiles, err = uc.repo.Find(input.Page, input.Limit)
-	}
-
+	profile, err = uc.repo.FindByUser(input.UserName)
 	if err != nil {
-		return nil, err
+		return GetProfileUseCaseOutputDTO{}, err
 	}
 
-	outputSlice := []GetProfileUseCaseOutputDTO{}
-
-	for _, profile := range profiles {
-		outputSlice = append(outputSlice, GetProfileUseCaseOutputDTO{
-			profile.ID,
-			profile.Name,
-			profile.Introduction,
-			profile.IconNum,
-			profile.GithubUrl,
-			profile.XUrl,
-		})
-	}
-
-	return outputSlice, nil
+	return GetProfileUseCaseOutputDTO{
+		profile.ID,
+		profile.Name,
+		profile.Introduction,
+		profile.IconNum,
+		profile.GithubUrl,
+		profile.XUrl,
+	}, nil
 }

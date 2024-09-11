@@ -1,20 +1,18 @@
 package usecase
 
-import (
-	"github.com/aridome222/Backend-Festival-Booth/domain"
-)
+import "github.com/aridome222/Backend-Festival-Booth/domain"
 
 type GetProductUseCase struct {
 	repo domain.ProductRepository
 }
 
 type GetProductUseCaseInputDTO struct {
-	Page  int
-	Limit int
+	UserName string
 }
 
 type GetProductUseCaseOutputDTO struct {
-	ProductID   string `json:"product_id"`
+	ID          string `json:"id"`
+	Title       string `json:"title"`
 	UserName    string `json:"user_name"`
 	Url         string `json:"url"`
 	Description string `json:"description"`
@@ -26,30 +24,20 @@ func NewGetProductUseCase(repo domain.ProductRepository) GetProductUseCase {
 	}
 }
 
-func (uc GetProductUseCase) GetProduct(input GetProductUseCaseInputDTO) ([]GetProductUseCaseOutputDTO, error) {
-	var products []domain.Product
+func (uc GetProductUseCase) GetProduct(input GetProductUseCaseInputDTO) (GetProductUseCaseOutputDTO, error) {
+	var product domain.Product
 	var err error
 
-	if input.Page < 0 || input.Limit < 0 {
-		products, err = uc.repo.FindAll()
-	} else {
-		products, err = uc.repo.Find(input.Page, input.Limit)
-	}
-
+	product, err = uc.repo.FindByUser(input.UserName)
 	if err != nil {
-		return nil, err
+		return GetProductUseCaseOutputDTO{}, err
 	}
 
-	outputSlice := []GetProductUseCaseOutputDTO{}
-
-	for _, product := range products {
-		outputSlice = append(outputSlice, GetProductUseCaseOutputDTO{
-			product.ProductID,
-			product.UserName,
-			product.Url,
-			product.Description,
-		})
-	}
-
-	return outputSlice, nil
+	return GetProductUseCaseOutputDTO{
+		product.ID,
+		product.Title,
+		product.UserName,
+		product.Url,
+		product.Description,
+	}, nil
 }
