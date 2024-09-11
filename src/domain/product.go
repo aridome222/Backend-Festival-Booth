@@ -12,7 +12,12 @@ type ProductRepository interface {
 	FindByUser(string) (Product, error)
 }
 
-func NewProduct(id string, userName string, url string, description string) Product {
+func NewProduct(
+	id string,
+	userName string,
+	url string,
+	description string,
+) Product {
 	return Product{
 		ProductID:   id,
 		UserName:    userName,
