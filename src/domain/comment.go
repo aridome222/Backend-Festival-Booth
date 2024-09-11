@@ -7,6 +7,7 @@ type Comment struct {
 }
 
 type CommentRepository interface {
+	Save(Comment) (Comment, error)
 }
 
 func NewComment(
