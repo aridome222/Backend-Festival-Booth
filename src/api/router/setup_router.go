@@ -49,6 +49,11 @@ func SetupRouter(db *gorm.DB) {
 			"POST",
 			"GET",
 		},
+		// 許可するHTTPリクエストヘッダ一覧
+		// AllowHeaders: []string{
+		// 	"Origin",
+		// 	"Content-Type",
+		// },
 	})
 
 	r.POST("/products", saveProductController.SaveProduct)
