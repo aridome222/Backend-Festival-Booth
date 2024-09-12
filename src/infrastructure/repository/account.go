@@ -15,6 +15,15 @@ func NewAccountRepository(db *gorm.DB) domain.AccountRepository {
 	}
 }
 
+func (repo AccountRepository) Create(account domain.Account) (domain.Account, error) {
+	result := repo.db.Create(&account)
+	if result.Error != nil {
+		return domain.Account{}, result.Error
+	}
+
+	return account, nil
+}
+
 func (repo AccountRepository) FindByName(name string) (domain.Account, error) {
 	var account domain.Account
 
