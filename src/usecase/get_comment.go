@@ -22,3 +22,19 @@ func NewGetCommentUseCase(repo domain.CommentRepository) GetCommentUseCase {
 		repo: repo,
 	}
 }
+
+func (uc GetCommentUseCase) GetComment(input GetCommentInputDTO) (GetCommentOutputDTO, error) {
+	var comment domain.Comment
+	var err error
+	comment, err = uc.repo.FindByProductID(input.ProductID)
+
+	if err != nil {
+		return GetCommentOutputDTO{}, err
+	}
+
+	return GetCommentOutputDTO{
+		comment.ID,
+		comment.ProductID,
+		comment.Message,
+	}, nil
+}
