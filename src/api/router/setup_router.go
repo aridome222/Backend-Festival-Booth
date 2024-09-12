@@ -41,6 +41,10 @@ func SetupRouter(db *gorm.DB) {
 	saveCommentUseCase := usecase.NewSaveCommentUseCase(commentRepository, productRepository)
 	saveCommentController := controller.NewSaveCommentController(saveCommentUseCase)
 
+	// get comment
+	getCommentUseCase := usecase.NewGetCommentUseCase(commentRepository)
+	getCommentController := controller.NewGetCommentController(getCommentUseCase)
+
 	// create account
 	accountRepository := repository.NewAccountRepository(db)
 	createAccountUseCase := usecase.NewCreateAccountUseCase(accountRepository)
@@ -79,6 +83,7 @@ func SetupRouter(db *gorm.DB) {
 
 	// /comments
 	r.POST("/comments", saveCommentController.SaveComment)
+	r.GET("/comments/:product_id", getCommentController.GetComment)
 
 	// /accounts
 	r.POST("/accounts", createAccountController.CreateAccount)
