@@ -9,8 +9,8 @@ type GetCommentUseCase struct {
 }
 
 type GetCommentInputDTO struct {
-	ProductID string `json:"product_id" binding:"required"`
-	Message   string `json:"message" binding:"required,min=1,max=100"`
+	ProductID string
+	Message   string
 }
 
 type GetCommentOutputDTO struct {
