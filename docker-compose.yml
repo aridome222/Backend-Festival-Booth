@@ -21,20 +21,24 @@ services:
     image: postgres:16
     ports:
       - "5432:5432"
-    # restart: always
+    restart: always
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: fes-booth-db
     volumes:
       - fes-booth-db:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
     networks:
       - fes-booth-network
+      - fes-booth-pg-network
 
   fes-booth-pgadmin4:
+    container_name: fes-booth-pgadmin4
     image: dpage/pgadmin4:8.4
     ports:
       - 81:80
+    restart: always
     volumes:
       - pgadmin-data:/var/lib/pgadmin
       - ./config/servers.json:/pgadmin4/servers.json
@@ -45,6 +49,8 @@ services:
       PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
     depends_on:
       - fes-booth-db
+    networks:
+      - fes-booth-pg-network
 
 volumes:
   fes-booth-db:
@@ -52,4 +58,6 @@ volumes:
 
 networks:
   fes-booth-network:
+    external: true
+  fes-booth-pg-network:
     external: true
