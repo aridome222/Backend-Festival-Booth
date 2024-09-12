@@ -26,7 +26,7 @@ func (repo CommentRepository) Save(comment domain.Comment) (domain.Comment, erro
 
 func (repo CommentRepository) FindByProductID(productID string) ([]domain.Comment, error) {
 	var comments []domain.Comment
-	result := repo.db.Where("productID = ?", productID).Find(&comments)
+	result := repo.db.Where("product_id = ?", productID).Find(&comments)
 	if result.Error != nil {
 		return []domain.Comment{}, result.Error
 	}
