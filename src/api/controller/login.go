@@ -33,7 +33,7 @@ func (con LoginController) Login(ctx *gin.Context) {
 	// ログイン処理に成功したか判定
 	accountName, isLogin := con.uc.Login(input)
 	if !isLogin {
-		ctx.JSON(http.StatusUnauthorized, gin.H{"error": errors.New("failed to login")})
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": errors.New("failed to login").Error()})
 		return
 	}
 
