@@ -8,6 +8,7 @@ type Comment struct {
 
 type CommentRepository interface {
 	Save(Comment) (Comment, error)
+	FindByProductID(string) (Comment, error)
 }
 
 func NewComment(
