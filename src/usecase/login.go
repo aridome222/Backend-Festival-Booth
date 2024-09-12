@@ -11,12 +11,13 @@ type LoginInputDTO struct {
 	Password string `json:"password" binding:"required"`
 }
 
-type LoginOutputDTO struct {
-	UserName string `json:"name"`
-}
-
 func NewLoginUseCase(repo domain.AccountRepository) LoginUseCase {
 	return LoginUseCase{
 		repo: repo,
 	}
+}
+
+// jwt生成に用いるUserIDを返り値とする
+func (uc LoginUseCase) Login(input LoginInputDTO) (string, bool) {
+
 }
