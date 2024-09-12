@@ -67,14 +67,21 @@ func SetupRouter(db *gorm.DB) {
 		AllowCredentials: true,
 	}))
 
+	// /products
 	r.POST("/products", saveProductController.SaveProduct)
-	r.POST("/profiles", saveProfileController.SaveProfile)
 	r.GET("/products", getProductListController.GetProductList)
 	r.GET("/products/:user_name", getProductController.GetProduct)
+
+	// /profiles
+	r.POST("/profiles", saveProfileController.SaveProfile)
 	r.GET("/profiles", getProfileListController.GetProfileList)
 	r.GET("/profiles/:name", getProfileController.GetProfile)
+
+	// /comments
 	r.POST("/comments", saveCommentController.SaveComment)
-	r.POST("/register", createAccountController.CreateAccount)
+
+	// /accounts
+	r.POST("/accounts", createAccountController.CreateAccount)
 
 	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
 }
