@@ -7,13 +7,14 @@ type GetCommentUseCase struct {
 }
 
 type GetCommentInputDTO struct {
-	Message string
+	ProductID string `json:"product_id" binding:"required"`
+	Message   string `json:"message" binding:"required,min=1,max=100"`
 }
 
 type GetCommentOutputDTO struct {
-	ID        string
-	ProductID string
-	Message   string
+	ID        string `json:"id"`
+	ProductID string `json:"product_id"`
+	Message   string `json:"message"`
 }
 
 func NewGetCommentUseCase(repo domain.CommentRepository) GetCommentUseCase {
