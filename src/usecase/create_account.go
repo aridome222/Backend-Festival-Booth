@@ -1,6 +1,8 @@
 package usecase
 
 import (
+	"errors"
+
 	"github.com/aridome222/Backend-Festival-Booth/domain"
 	"github.com/oklog/ulid/v2"
 )
@@ -32,7 +34,7 @@ func (uc CreateAccountUseCase) CreateAccount(input CreateAccountInputDTO) (Creat
 
 	// TODO: アカウントが存在しなかった場合以外のエラー処理を記述
 	if err == nil {
-		return CreateAccountOutputDTO{}, nil
+		return CreateAccountOutputDTO{}, errors.New("this account name is used")
 	}
 
 	account, err = domain.NewAccount(ulid.Make().String(), input.UserName, input.Password)
