@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/aridome222/Backend-Festival-Booth/api/controller"
+	"github.com/aridome222/Backend-Festival-Booth/api/middleware"
 	"github.com/aridome222/Backend-Festival-Booth/infrastructure/repository"
 	"github.com/aridome222/Backend-Festival-Booth/usecase"
 	"github.com/gin-contrib/cors"
@@ -72,6 +73,9 @@ func SetupRouter(db *gorm.DB) {
 		AllowCredentials: true,
 	}))
 
+	// ルーティングのグループ化
+	healthRouter := r.Group("/auth", middleware.AuthJWT())
+
 	// /login
 	r.POST("/login", loginController.Login)
 
@@ -90,6 +94,9 @@ func SetupRouter(db *gorm.DB) {
 
 	// /accounts
 	r.POST("/accounts", createAccountController.CreateAccount)
+
+	// /health 認証テスト用
+	healthRouter.GET("/health", controller.Health)
 
 	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
 }
