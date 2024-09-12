@@ -66,7 +66,7 @@ func SetupRouter(db *gorm.DB) {
 		// 	"Content-Type",
 		// },
 		AllowOrigins: []string{
-			"http://localhost:3000",
+			"http://localhost:5173",
 		},
 		// cookieなどの情報を必要とするかどうか
 		AllowCredentials: true,
