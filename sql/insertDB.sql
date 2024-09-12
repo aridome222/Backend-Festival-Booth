@@ -5,9 +5,9 @@ INSERT INTO profiles (id, name, introduction, icon_num, github_url, x_url) VALUE
 INSERT INTO profiles (id, name, introduction, icon_num, github_url, x_url) VALUES ('u5', 'u5_name', 'u5_intro', 0, 'u5_github_url', 'u5_x_url');
 
 INSERT INTO products (id, title, user_name, url, description) VALUES ('p1', 'p1_title', 'u1_name', 'p1_url', 'p1_description');
-INSERT INTO products (id, title, user_name, url, description) VALUES ('p2', 'p2_title', 'u1_name', 'p2_url', 'p2_description');
-INSERT INTO products (id, title, user_name, url, description) VALUES ('p3', 'p3_title', 'u2_name', 'p3_url', 'p3_description');
-INSERT INTO products (id, title, user_name, url, description) VALUES ('p4', 'p4_title', 'u3_name', 'p4_url', 'p4_description');
+INSERT INTO products (id, title, user_name, url, description) VALUES ('p2', 'p2_title', 'u2_name', 'p2_url', 'p2_description');
+INSERT INTO products (id, title, user_name, url, description) VALUES ('p3', 'p3_title', 'u3_name', 'p3_url', 'p3_description');
+INSERT INTO products (id, title, user_name, url, description) VALUES ('p4', 'p4_title', 'u4_name', 'p4_url', 'p4_description');
 
 INSERT INTO comments (id, product_id, message) VALUES ('c1', 'p1_product', 'c1_p1_message');
 INSERT INTO comments (id, product_id, message) VALUES ('c2', 'p2_product', 'c2_p2_message');
