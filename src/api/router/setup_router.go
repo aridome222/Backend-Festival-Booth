@@ -10,6 +10,11 @@ import (
 )
 
 func SetupRouter(db *gorm.DB) {
+	// get login
+	loginRepository := repository.NewAccountRepository(db)
+	loginUseCase := usecase.NewLoginUseCase(loginRepository)
+	loginController := controller.NewLoginController(loginUseCase)
+
 	// save product
 	productRepository := repository.NewProductRepository(db)
 	saveProductUseCase := usecase.NewSaveProductUseCase(productRepository)
@@ -66,6 +71,9 @@ func SetupRouter(db *gorm.DB) {
 		// cookieなどの情報を必要とするかどうか
 		AllowCredentials: true,
 	}))
+
+	// /login
+	r.POST("/login", loginController.Login)
 
 	// /products
 	r.POST("/products", saveProductController.SaveProduct)
