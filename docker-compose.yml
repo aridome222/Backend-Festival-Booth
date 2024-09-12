@@ -28,6 +28,7 @@ services:
       POSTGRES_DB: fes-booth-db
     volumes:
       - fes-booth-db:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
     networks:
       - fes-booth-network
       - fes-booth-pg-network
