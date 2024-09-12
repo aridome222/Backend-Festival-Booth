@@ -10,13 +10,13 @@ type CreateAccountUseCase struct {
 }
 
 type CreateAccountInputDTO struct {
-	UserName string `json:"user_name" binding:"required,min=1,max=20"`
+	UserName string `json:"name" binding:"required,min=1,max=20"`
 	Password string `json:"password" binding:"required,min=1"`
 }
 
 type CreateAccountOutputDTO struct {
 	ID       string `json:"id"`
-	UserName string `json:"user_name"`
+	UserName string `json:"name"`
 	Password string `json:"password"`
 }
 
