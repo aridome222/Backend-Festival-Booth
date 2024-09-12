@@ -49,7 +49,7 @@ func (con LoginController) Login(ctx *gin.Context) {
 	if err != nil {
 		ctx.JSON(
 			http.StatusInternalServerError,
-			gin.H{"error": errors.New("failed to generate token")},
+			gin.H{"error": errors.New("failed to generate token").Error()},
 		)
 		return
 	}
