@@ -10,7 +10,6 @@ type GetCommentUseCase struct {
 
 type GetCommentInputDTO struct {
 	ProductID string
-	Message   string
 }
 
 type GetCommentOutputDTO struct {
