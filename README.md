@@ -28,6 +28,7 @@ APIサーバは `localhost:8080` , PgAdminは `localhost:81` で立ち上がる
 - Go
 - Gin
 - Gorm
+- Air
 - PostgreSQL
 - PgAdmin
 - Docker

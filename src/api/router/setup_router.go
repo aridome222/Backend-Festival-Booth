@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/aridome222/Backend-Festival-Booth/api/controller"
+	"github.com/aridome222/Backend-Festival-Booth/api/middleware"
 	"github.com/aridome222/Backend-Festival-Booth/infrastructure/repository"
 	"github.com/aridome222/Backend-Festival-Booth/usecase"
 	"github.com/gin-contrib/cors"
@@ -10,6 +11,11 @@ import (
 )
 
 func SetupRouter(db *gorm.DB) {
+	// get login
+	loginRepository := repository.NewAccountRepository(db)
+	loginUseCase := usecase.NewLoginUseCase(loginRepository)
+	loginController := controller.NewLoginController(loginUseCase)
+
 	// save product
 	productRepository := repository.NewProductRepository(db)
 	saveProductUseCase := usecase.NewSaveProductUseCase(productRepository)
@@ -65,11 +71,17 @@ func SetupRouter(db *gorm.DB) {
 		// 	"Content-Type",
 		// },
 		AllowOrigins: []string{
-			"http://localhost:3000",
+			"http://localhost:5173",
 		},
 		// cookieなどの情報を必要とするかどうか
 		AllowCredentials: true,
 	}))
+
+	// ルーティングのグループ化
+	healthRouter := r.Group("/auth", middleware.AuthJWT())
+
+	// /login
+	r.POST("/login", loginController.Login)
 
 	// /products
 	r.POST("/products", saveProductController.SaveProduct)
@@ -87,6 +99,9 @@ func SetupRouter(db *gorm.DB) {
 
 	// /accounts
 	r.POST("/accounts", createAccountController.CreateAccount)
+
+	// /health 認証テスト用
+	healthRouter.GET("/health", controller.Health)
 
 	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
 }
