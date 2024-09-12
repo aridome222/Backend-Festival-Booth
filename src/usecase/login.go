@@ -27,5 +27,5 @@ func (uc LoginUseCase) Login(input LoginInputDTO) (string, bool) {
 		return "", false
 	}
 
-	return account.ID, account.IsValidPassword(input.Password)
+	return account.Name, account.IsValidPassword(input.Password)
 }
