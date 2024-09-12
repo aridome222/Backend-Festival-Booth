@@ -6,6 +6,10 @@ type Account struct {
 	Password string `gorm:"not null"`
 }
 
+type AccountRepository struct {
+	// TODO
+}
+
 func NewAccount(
 	id string,
 	name string,
