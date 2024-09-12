@@ -4,6 +4,7 @@ import (
 	"github.com/aridome222/Backend-Festival-Booth/api/controller"
 	"github.com/aridome222/Backend-Festival-Booth/infrastructure/repository"
 	"github.com/aridome222/Backend-Festival-Booth/usecase"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -41,7 +42,25 @@ func SetupRouter(db *gorm.DB) {
 	saveCommentController := controller.NewSaveCommentController(saveCommentUseCase)
 
 	r := gin.Default()
-	// TODO: cors設定を追記
+	// TODO: cors設定を適宜調整
+	r.Use(cors.New(cors.Config{
+		// 許可するHTTPメソッド一覧
+		AllowMethods: []string{
+			"POST",
+			"GET",
+		},
+		// 許可するHTTPリクエストヘッダ一覧
+		// AllowHeaders: []string{
+		//  "Access-Control-Allow-Credentials",
+		// 	"Origin",
+		// 	"Content-Type",
+		// },
+		AllowOrigins: []string{
+			"http://localhost:3000",
+		},
+		// cookieなどの情報を必要とするかどうか
+		AllowCredentials: true,
+	}))
 
 	r.POST("/products", saveProductController.SaveProduct)
 	r.POST("/profiles", saveProfileController.SaveProfile)
