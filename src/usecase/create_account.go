@@ -35,7 +35,10 @@ func (uc CreateAccountUseCase) CreateAccount(input CreateAccountInputDTO) (Creat
 		return CreateAccountOutputDTO{}, nil
 	}
 
-	account = domain.NewAccount(ulid.Make().String(), input.UserName, input.Password)
+	account, err = domain.NewAccount(ulid.Make().String(), input.UserName, input.Password)
+	if err != nil {
+		return CreateAccountOutputDTO{}, err
+	}
 
 	// 同一アカウントが存在しない場合はDBに保存
 	account, err = uc.repo.Create(account)
