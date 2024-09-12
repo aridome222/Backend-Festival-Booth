@@ -6,7 +6,7 @@ type Account struct {
 	Password string `gorm:"not null"`
 }
 
-type AccountRepository struct {
+type AccountRepository interface {
 	// TODO
 }
 
