@@ -7,7 +7,7 @@ type Account struct {
 }
 
 type AccountRepository interface {
-	// TODO
+	FindByName(string) (Account, error)
 }
 
 func NewAccount(
