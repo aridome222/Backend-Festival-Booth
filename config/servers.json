@@ -1,9 +1,9 @@
 {
   "Servers": {
     "1": {
-      "Name": "db",
+      "Name": "fes-booth-db",
       "Group": "Servers",
-      "Host": "db",
+      "Host": "fes-booth-db",
       "Port": 5432,
       "MaintenanceDB": "postgres",
       "Username": "user",
