@@ -43,7 +43,13 @@ func SetupRouter(db *gorm.DB) {
 
 	r := gin.Default()
 	// TODO: cors設定を適宜調整
-	r.Use(cors.Config{})
+	r.Use(cors.Config{
+		// 許可するHTTPメソッド一覧
+		AllowMethods: []string{
+			"POST",
+			"GET",
+		},
+	})
 
 	r.POST("/products", saveProductController.SaveProduct)
 	r.POST("/profiles", saveProfileController.SaveProfile)
