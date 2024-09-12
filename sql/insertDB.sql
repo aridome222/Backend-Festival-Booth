@@ -1,3 +1,11 @@
+INSERT INTO accounts (id, name, password) VALUES ('a0', 'a0_name', 'a0_password');
+INSERT INTO accounts (id, name, password) VALUES ('a1', 'a1_name', 'a1_password');
+INSERT INTO accounts (id, name, password) VALUES ('a2', 'a2_name', 'a2_password');
+INSERT INTO accounts (id, name, password) VALUES ('a3', 'a3_name', 'a3_password');
+INSERT INTO accounts (id, name, password) VALUES ('a4', 'a4_name', 'a4_password');
+INSERT INTO accounts (id, name, password) VALUES ('a5', 'a5_name', 'a5_password');
+INSERT INTO accounts (id, name, password) VALUES ('a6', 'a6_name', 'a6_password');
+
 INSERT INTO profiles (id, name, introduction, icon_num, github_url, x_url) VALUES ('u1', 'u1_name', 'u1_intro', 0, 'u1_github_url', 'u1_x_url');
 INSERT INTO profiles (id, name, introduction, icon_num, github_url, x_url) VALUES ('u2', 'u2_name', 'u2_intro', 0, 'u2_github_url', 'u2_x_url');
 INSERT INTO profiles (id, name, introduction, icon_num, github_url, x_url) VALUES ('u3', 'u3_name', 'u3_intro', 0, 'u3_github_url', 'u3_x_url');
