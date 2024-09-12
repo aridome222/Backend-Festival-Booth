@@ -14,3 +14,14 @@ func NewAccountRepository(db *gorm.DB) domain.AccountRepository {
 		db: db,
 	}
 }
+
+func (repo AccountRepository) FindByName(name string) (domain.Account, error) {
+	var account domain.Account
+
+	result := repo.db.Where("name = ?", name).First(&account)
+	if result.Error != nil {
+		return domain.Account{}, result.Error
+	}
+
+	return account, nil
+}
