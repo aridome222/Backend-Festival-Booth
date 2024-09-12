@@ -12,6 +12,7 @@ func Migrate() {
 		&domain.Product{},
 		&domain.Profile{},
 		&domain.Comment{},
+		&domain.Account{},
 	); err != nil {
 		panic("failed to migrate")
 	}

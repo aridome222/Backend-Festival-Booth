@@ -41,6 +41,11 @@ func SetupRouter(db *gorm.DB) {
 	saveCommentUseCase := usecase.NewSaveCommentUseCase(commentRepository, productRepository)
 	saveCommentController := controller.NewSaveCommentController(saveCommentUseCase)
 
+	// create account
+	accountRepository := repository.NewAccountRepository(db)
+	createAccountUseCase := usecase.NewCreateAccountUseCase(accountRepository)
+	createAccountController := controller.NewCreateAccountController(createAccountUseCase)
+
 	r := gin.Default()
 	// TODO: cors設定を適宜調整
 	r.Use(cors.New(cors.Config{
@@ -62,13 +67,21 @@ func SetupRouter(db *gorm.DB) {
 		AllowCredentials: true,
 	}))
 
+	// /products
 	r.POST("/products", saveProductController.SaveProduct)
-	r.POST("/profiles", saveProfileController.SaveProfile)
 	r.GET("/products", getProductListController.GetProductList)
 	r.GET("/products/:user_name", getProductController.GetProduct)
+
+	// /profiles
+	r.POST("/profiles", saveProfileController.SaveProfile)
 	r.GET("/profiles", getProfileListController.GetProfileList)
 	r.GET("/profiles/:name", getProfileController.GetProfile)
+
+	// /comments
 	r.POST("/comments", saveCommentController.SaveComment)
+
+	// /accounts
+	r.POST("/accounts", createAccountController.CreateAccount)
 
 	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
 }
