@@ -25,6 +25,13 @@ func (con SaveCommentController) SaveComment(ctx *gin.Context) {
 		return
 	}
 
+	user_name, exists := ctx.Get("user")
+	if !exists {
+		ctx.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+	input.UserName = user_name.(string)
+
 	savedComment, err := con.uc.SaveComment(input)
 	// TODO: errがproductIDが一致するproductが存在しない場合は、400で返したい
 	if err != nil {
