@@ -33,9 +33,11 @@ func ConnectDB() *gorm.DB {
 }
 
 func loadEnv() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		fmt.Println("fail to load .env file")
+	if product := os.Getenv(("PRODUCTION")); product == "" {
+		err := godotenv.Load(".env")
+		if err != nil {
+			fmt.Println("fail to load .env file")
+		}
 	}
 	dbHost = os.Getenv("DB_HOST")
 	dbUser = os.Getenv("DB_USER")
