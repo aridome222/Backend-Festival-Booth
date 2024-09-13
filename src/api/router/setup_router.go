@@ -70,6 +70,7 @@ func SetupRouter(db *gorm.DB) {
 		},
 		AllowOrigins: []string{
 			"http://localhost:5173",
+			"https://frontend-festival-booth.vercel.app/",
 		},
 		// cookieなどの情報を必要とするかどうか
 		AllowCredentials: true,
