@@ -43,6 +43,12 @@ func (uc SaveCommentUseCase) SaveComment(input SaveCommentUseCaseInputDTO) (Save
 		return SaveCommentUseCaseOutputDTO{}, err
 	}
 
+	_, err = uc.accountRepo.FindByName(input.UserName)
+	// TODO: accountが見つからなかった場合以外のエラーハンドリングを記述
+	if err != nil {
+		return SaveCommentUseCaseOutputDTO{}, err
+	}
+
 	comment := domain.NewComment(ulid.Make().String(), input.ProductID, input.Message)
 
 	comment, err = uc.repo.Save(comment)
