@@ -99,5 +99,8 @@ func SetupRouter(db *gorm.DB) {
 	r.POST("/comments", saveCommentController.SaveComment)
 	r.GET("/comments/:product_id", getCommentController.GetComment)
 
+	// health check用
+	r.GET("/", controller.Health)
+
 	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
 }
