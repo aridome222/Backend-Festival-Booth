@@ -23,7 +23,7 @@ func SetupRouter(db *gorm.DB) {
 
 	// save product
 	productRepository := repository.NewProductRepository(db)
-	saveProductUseCase := usecase.NewSaveProductUseCase(productRepository)
+	saveProductUseCase := usecase.NewSaveProductUseCase(productRepository, accountRepository)
 	saveProductController := controller.NewSaveProductController(saveProductUseCase)
 
 	// get products
