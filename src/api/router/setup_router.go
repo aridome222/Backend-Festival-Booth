@@ -82,10 +82,10 @@ func SetupRouter(db *gorm.DB) {
 
 	// /login
 	r.POST("/login", loginController.Login)
+	authRouter.GET("/login", controller.GetAccount)
 
 	// /accounts
 	r.POST("/accounts", createAccountController.CreateAccount)
-	authRouter.GET("/accounts", controller.GetAccount)
 
 	// /profiles
 	authRouter.POST("/profiles", saveProfileController.SaveProfile)
