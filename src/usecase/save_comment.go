@@ -8,15 +8,18 @@ import (
 type SaveCommentUseCase struct {
 	repo        domain.CommentRepository
 	productRepo domain.ProductRepository
+	accountRepo domain.AccountRepository
 }
 
 type SaveCommentUseCaseInputDTO struct {
 	ProductID string `json:"product_id" binding:"required"`
+	UserName  string
 	Message   string `json:"message" binding:"required,min=1,max=100"`
 }
 
 type SaveCommentUseCaseOutputDTO struct {
 	ID        string `json:"id"`
+	UserName  string `json:"user_name"`
 	ProductID string `json:"product_id"`
 	Message   string `json:"message"`
 }
@@ -24,10 +27,12 @@ type SaveCommentUseCaseOutputDTO struct {
 func NewSaveCommentUseCase(
 	repo domain.CommentRepository,
 	productRepo domain.ProductRepository,
+	accountRepo domain.AccountRepository,
 ) SaveCommentUseCase {
 	return SaveCommentUseCase{
 		repo:        repo,
 		productRepo: productRepo,
+		accountRepo: accountRepo,
 	}
 }
 
@@ -47,6 +52,7 @@ func (uc SaveCommentUseCase) SaveComment(input SaveCommentUseCaseInputDTO) (Save
 
 	return SaveCommentUseCaseOutputDTO{
 		ID:        comment.ID,
+		UserName:  comment.UserName,
 		ProductID: comment.ProductID,
 		Message:   comment.Message,
 	}, nil
