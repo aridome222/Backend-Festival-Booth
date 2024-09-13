@@ -14,11 +14,13 @@ type CommentRepository interface {
 
 func NewComment(
 	id string,
+	user_name string,
 	productID string,
 	message string,
 ) Comment {
 	return Comment{
 		ID:        id,
+		UserName:  user_name,
 		ProductID: productID,
 		Message:   message,
 	}

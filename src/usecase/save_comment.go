@@ -49,7 +49,7 @@ func (uc SaveCommentUseCase) SaveComment(input SaveCommentUseCaseInputDTO) (Save
 		return SaveCommentUseCaseOutputDTO{}, err
 	}
 
-	comment := domain.NewComment(ulid.Make().String(), input.ProductID, input.Message)
+	comment := domain.NewComment(ulid.Make().String(), input.UserName, input.ProductID, input.Message)
 
 	comment, err = uc.repo.Save(comment)
 	if err != nil {
