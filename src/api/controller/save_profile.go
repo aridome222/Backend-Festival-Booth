@@ -27,6 +27,14 @@ func (con SaveProfileController) SaveProfile(ctx *gin.Context) {
 		return
 	}
 
+	// cookieからユーザー名を取得
+	user_name, exists := ctx.Get("user")
+	if !exists {
+		ctx.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+	input.Name = user_name.(string)
+
 	// 自己紹介を保存するメソッドを実行
 	savedProfile, err := con.uc.SaveProfile(input)
 	if err != nil {
