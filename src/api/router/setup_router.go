@@ -36,7 +36,7 @@ func SetupRouter(db *gorm.DB) {
 
 	// save profile
 	profileRepository := repository.NewProfileRepository(db)
-	saveProfileUseCase := usecase.NewSaveProfileUseCase(profileRepository)
+	saveProfileUseCase := usecase.NewSaveProfileUseCase(profileRepository, accountRepository)
 	saveProfileController := controller.NewSaveProfileController(saveProfileUseCase)
 
 	// get profiles
