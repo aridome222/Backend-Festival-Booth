@@ -6,12 +6,13 @@ import (
 )
 
 type SaveProductUseCase struct {
-	repo domain.ProductRepository
+	repo        domain.ProductRepository
+	accountRepo domain.AccountRepository
 }
 
 type SaveProductInputDTO struct {
 	Title       string `json:"title" binding:"required,min=1,max=50"`
-	UserName    string `json:"user_name" binding:"required,min=1,max=20"`
+	UserName    string
 	Url         string `json:"url" binding:"required"`
 	Description string `json:"description" binding:"min=0,max=200"`
 }
@@ -24,9 +25,13 @@ type SaveProductOutputDTO struct {
 	Description string `json:"description"`
 }
 
-func NewSaveProductUseCase(repo domain.ProductRepository) SaveProductUseCase {
+func NewSaveProductUseCase(
+	repo domain.ProductRepository,
+	accountRepo domain.AccountRepository,
+) SaveProductUseCase {
 	return SaveProductUseCase{
-		repo: repo,
+		repo:        repo,
+		accountRepo: accountRepo,
 	}
 }
 
