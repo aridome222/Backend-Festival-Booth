@@ -17,7 +17,7 @@ type SaveProfileInputDTO struct {
 	// XUrl         string `json:"x_url"`
 	Name         string `json:"name" binding:"required,min=1,max=20"`
 	Introduction string `json:"introduction" binding:"required,min=1,max=200"`
-	IconNum      int    `json:"icon_num" binding:"required"`
+	IconNum      int    `json:"icon_num"`
 	GithubUrl    string `json:"github_url"`
 	XUrl         string `json:"x_url"`
 }
