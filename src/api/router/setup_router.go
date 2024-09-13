@@ -78,7 +78,7 @@ func SetupRouter(db *gorm.DB) {
 	}))
 
 	// ルーティングのグループ化
-	authRouter := r.Group("/auth", middleware.AuthJWT())
+	authRouter := r.Group("/", middleware.AuthJWT())
 
 	// /login
 	r.POST("/login", loginController.Login)
