@@ -83,22 +83,22 @@ func SetupRouter(db *gorm.DB) {
 	// /login
 	r.POST("/login", loginController.Login)
 
-	// /products
-	r.POST("/products", saveProductController.SaveProduct)
-	r.GET("/products", getProductListController.GetProductList)
-	r.GET("/products/:user_name", getProductController.GetProduct)
+	// /accounts
+	r.POST("/accounts", createAccountController.CreateAccount)
 
 	// /profiles
 	r.POST("/profiles", saveProfileController.SaveProfile)
 	r.GET("/profiles", getProfileListController.GetProfileList)
 	r.GET("/profiles/:name", getProfileController.GetProfile)
 
+	// /products
+	r.POST("/products", saveProductController.SaveProduct)
+	r.GET("/products", getProductListController.GetProductList)
+	r.GET("/products/:user_name", getProductController.GetProduct)
+
 	// /comments
 	r.POST("/comments", saveCommentController.SaveComment)
 	r.GET("/comments/:product_id", getCommentController.GetComment)
-
-	// /accounts
-	r.POST("/accounts", createAccountController.CreateAccount)
 
 	// /health 認証テスト用
 	healthRouter.GET("/health", controller.Health)
