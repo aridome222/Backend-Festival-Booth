@@ -36,6 +36,12 @@ func NewSaveProductUseCase(
 }
 
 func (uc SaveProductUseCase) SaveProduct(input SaveProductInputDTO) (SaveProductOutputDTO, error) {
+	_, err := uc.accountRepo.FindByName(input.UserName)
+	// TODO: accountが見つからなかった場合以外のエラーハンドリングを記述
+	if err != nil {
+		return SaveProductOutputDTO{}, err
+	}
+
 	product, err := uc.repo.FindByUser(input.UserName)
 	// TODO: レコードが何も見つからなった場合以外のエラーハンドリングを記述する
 	// if err != nil {
