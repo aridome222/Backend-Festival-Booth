@@ -17,13 +17,13 @@ INSERT INTO products (id, title, user_name, url, description) VALUES ('p2', 'p2_
 INSERT INTO products (id, title, user_name, url, description) VALUES ('p3', 'p3_title', 'u3_name', 'p3_url', 'p3_description');
 INSERT INTO products (id, title, user_name, url, description) VALUES ('p4', 'p4_title', 'u4_name', 'p4_url', 'p4_description');
 
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c1', 'a0_name', 'p1_product', 'c1_p1_message');
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c2', 'a0_name', 'p2_product', 'c2_p2_message');
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c3', 'a0_name', 'p1_product', 'c3_p1_message');
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c4', 'a1_name', 'p3_product', 'c4_p3_message');
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c5', 'a0_name', 'p4_product', 'c5_p4_message');
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c6', 'a3_name', 'p1_product', 'c6_p1_message');
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c7', 'a0_name', 'p1_product', 'c7_p1_message');
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c8', 'a1_name', 'p1_product', 'c8_p1_message');
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c9', 'a2_name', 'p2_product', 'c9_p2_message');
-INSERT INTO comments (id, user_name, product_id, message) VALUES ('c10', 'a1_name', 'p1_product', 'c10_p1_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c1', 'a0_name', 'p1', 'c1_p1_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c2', 'a0_name', 'p2', 'c2_p2_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c3', 'a0_name', 'p1', 'c3_p1_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c4', 'a1_name', 'p3', 'c4_p3_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c5', 'a0_name', 'p4', 'c5_p4_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c6', 'a3_name', 'p1', 'c6_p1_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c7', 'a0_name', 'p1', 'c7_p1_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c8', 'a1_name', 'p1', 'c8_p1_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c9', 'a2_name', 'p2', 'c9_p2_message');
+INSERT INTO comments (id, user_name, product_id, message) VALUES ('c10', 'a1_name', 'p1', 'c10_p1_message');
