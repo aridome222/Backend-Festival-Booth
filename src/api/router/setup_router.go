@@ -11,6 +11,11 @@ import (
 )
 
 func SetupRouter(db *gorm.DB) {
+	// create account
+	accountRepository := repository.NewAccountRepository(db)
+	createAccountUseCase := usecase.NewCreateAccountUseCase(accountRepository)
+	createAccountController := controller.NewCreateAccountController(createAccountUseCase)
+
 	// get login
 	loginRepository := repository.NewAccountRepository(db)
 	loginUseCase := usecase.NewLoginUseCase(loginRepository)
@@ -44,17 +49,12 @@ func SetupRouter(db *gorm.DB) {
 
 	// save comment
 	commentRepository := repository.NewCommentRepository(db)
-	saveCommentUseCase := usecase.NewSaveCommentUseCase(commentRepository, productRepository)
+	saveCommentUseCase := usecase.NewSaveCommentUseCase(commentRepository, productRepository, accountRepository)
 	saveCommentController := controller.NewSaveCommentController(saveCommentUseCase)
 
 	// get comment
 	getCommentUseCase := usecase.NewGetCommentUseCase(commentRepository)
 	getCommentController := controller.NewGetCommentController(getCommentUseCase)
-
-	// create account
-	accountRepository := repository.NewAccountRepository(db)
-	createAccountUseCase := usecase.NewCreateAccountUseCase(accountRepository)
-	createAccountController := controller.NewCreateAccountController(createAccountUseCase)
 
 	r := gin.Default()
 	// TODO: cors設定を適宜調整
