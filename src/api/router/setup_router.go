@@ -78,13 +78,14 @@ func SetupRouter(db *gorm.DB) {
 	}))
 
 	// ルーティングのグループ化
-	healthRouter := r.Group("/auth", middleware.AuthJWT())
+	authRouter := r.Group("/auth", middleware.AuthJWT())
 
 	// /login
 	r.POST("/login", loginController.Login)
 
 	// /accounts
 	r.POST("/accounts", createAccountController.CreateAccount)
+	authRouter.GET("/accounts", controller.GetAccount)
 
 	// /profiles
 	r.POST("/profiles", saveProfileController.SaveProfile)
@@ -99,9 +100,6 @@ func SetupRouter(db *gorm.DB) {
 	// /comments
 	r.POST("/comments", saveCommentController.SaveComment)
 	r.GET("/comments/:product_id", getCommentController.GetComment)
-
-	// /health 認証テスト用
-	healthRouter.GET("/health", controller.Health)
 
 	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
 }
