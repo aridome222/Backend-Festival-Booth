@@ -25,6 +25,14 @@ func (con SaveProductController) SaveProduct(ctx *gin.Context) {
 		return
 	}
 
+	// cookieからユーザー名を取得
+	user_name, exists := ctx.Get("user")
+	if !exists {
+		ctx.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+	input.UserName = user_name.(string)
+
 	savedProduct, err := con.uc.SaveProduct(input)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
