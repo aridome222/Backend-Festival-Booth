@@ -3,7 +3,8 @@ package usecase
 import "github.com/aridome222/Backend-Festival-Booth/domain"
 
 type GetProfileListUseCase struct {
-	repo domain.ProfileRepository
+	repo        domain.ProfileRepository
+	accountRepo domain.AccountRepository
 }
 
 type GetProfileListUseCaseInputDTO struct {
@@ -18,11 +19,16 @@ type GetProfileListUseCaseOutputDTO struct {
 	IconNum      int    `json:"icon_num"`
 	GithubUrl    string `json:"github_url"`
 	XUrl         string `json:"x_url"`
+	Answer       int    `json:"answer"`
 }
 
-func NewGetProfileListUseCase(repo domain.ProfileRepository) GetProfileListUseCase {
+func NewGetProfileListUseCase(
+	repo domain.ProfileRepository,
+	accountRepo domain.AccountRepository,
+) GetProfileListUseCase {
 	return GetProfileListUseCase{
-		repo: repo,
+		repo:        repo,
+		accountRepo: accountRepo,
 	}
 }
 
@@ -43,6 +49,11 @@ func (uc GetProfileListUseCase) GetProfileList(input GetProfileListUseCaseInputD
 	outputSlice := []GetProfileListUseCaseOutputDTO{}
 
 	for _, profile := range profiles {
+		account, err := uc.accountRepo.FindByName(profile.Name)
+		if err != nil {
+			return nil, err
+		}
+
 		outputSlice = append(outputSlice, GetProfileListUseCaseOutputDTO{
 			profile.ID,
 			profile.Name,
@@ -50,6 +61,7 @@ func (uc GetProfileListUseCase) GetProfileList(input GetProfileListUseCaseInputD
 			profile.IconNum,
 			profile.GithubUrl,
 			profile.XUrl,
+			account.Answer,
 		})
 	}
 
