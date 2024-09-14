@@ -11,7 +11,7 @@ type Account struct {
 
 type AccountRepository interface {
 	Create(Account) (Account, error)
-	Update(Account) (Account, error)
+	Save(Account) (Account, error)
 	FindByName(string) (Account, error)
 }
 
