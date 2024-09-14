@@ -1,6 +1,8 @@
 package usecase
 
-import "github.com/aridome222/Backend-Festival-Booth/domain"
+import (
+	"github.com/aridome222/Backend-Festival-Booth/domain"
+)
 
 type LoginUseCase struct {
 	repo domain.AccountRepository
