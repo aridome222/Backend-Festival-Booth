@@ -37,7 +37,7 @@ func (uc CreateAccountUseCase) CreateAccount(input CreateAccountInputDTO) (Creat
 		return CreateAccountOutputDTO{}, errors.New("this account name is used")
 	}
 
-	account, err = domain.NewAccount(ulid.Make().String(), input.UserName, input.Password)
+	account, err = domain.NewAccount(ulid.Make().String(), input.UserName, input.Password, "")
 	if err != nil {
 		return CreateAccountOutputDTO{}, err
 	}
