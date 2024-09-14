@@ -23,5 +23,24 @@ func NewSaveGroupUseCase(repo domain.AccountRepository) SaveGroupUseCase {
 }
 
 func (uc SaveGroupUseCase) SaveGroup(input SaveGroupInputDTO) (SaveGroupOutputDTO, error) {
+	account, err := uc.repo.FindByName(input.UserName)
+	// TODO: accountが見つからなかった場合以外のエラーハンドリングを記述
+	if err != nil {
+		return SaveGroupOutputDTO{}, err
+	}
 
+	account, err = domain.NewAccount(account.ID, account.Name, account.Password, input.Group)
+	if err != nil {
+		return SaveGroupOutputDTO{}, err
+	}
+
+	account, err = uc.repo.Save(account)
+	if err != nil {
+		return SaveGroupOutputDTO{}, err
+	}
+
+	return SaveGroupOutputDTO{
+		account.Name,
+		account.Group,
+	}, nil
 }
