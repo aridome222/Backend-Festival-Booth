@@ -1,6 +1,8 @@
 package router
 
 import (
+	"time"
+
 	"github.com/aridome222/Backend-Festival-Booth/api/controller"
 	"github.com/aridome222/Backend-Festival-Booth/api/middleware"
 	"github.com/aridome222/Backend-Festival-Booth/infrastructure/repository"
@@ -62,34 +64,34 @@ func SetupRouter(db *gorm.DB) {
 
 	r := gin.Default()
 	// TODO: cors設定を適宜調整
-	// r.Use(cors.New(cors.Config{
-	// 	// 許可するHTTPメソッド一覧
-	// 	AllowMethods: []string{
-	// 		"POST",
-	// 		"GET",
-	// 		"OPTIONS",
-	// 	},
-	// 	// 許可するHTTPリクエストヘッダ一覧
-	// 	AllowHeaders: []string{
-	// 		"Access-Control-Allow-Credentials",
-	// 		"Access-Control-Allow-Headers",
-	// 		"Content-Type",
-	// 		// "Content-Length",
-	// 		// "Accept-Encoding",
-	// 		// "Authorization",
-	// 		// "accessToken",
-	// 		"Set-Cookie",
-	// 		"Cookie",
-	// 	},
-	// 	AllowOrigins: []string{
-	// 		"http://localhost:5173",
-	// 		"https://frontend-festival-booth.vercel.app",
-	// 	},
-	// 	// cookieなどの情報を必要とするかどうか
-	// 	AllowCredentials: true,
-	// 	MaxAge:           24 * time.Hour,
-	// }))
-	r.Use(cors.Default())
+	r.Use(cors.New(cors.Config{
+		// 許可するHTTPメソッド一覧
+		AllowMethods: []string{
+			"POST",
+			"GET",
+			"OPTIONS",
+		},
+		// 許可するHTTPリクエストヘッダ一覧
+		AllowHeaders: []string{
+			"Access-Control-Allow-Credentials",
+			// "Access-Control-Allow-Headers",
+			"Content-Type",
+			// "Content-Length",
+			// "Accept-Encoding",
+			// "Authorization",
+			// "accessToken",
+			// "Set-Cookie",
+			// "Cookie",
+		},
+		AllowOrigins: []string{
+			"http://localhost:5173",
+			"https://frontend-festival-booth.vercel.app",
+		},
+		// cookieなどの情報を必要とするかどうか
+		AllowCredentials: true,
+		MaxAge:           24 * time.Hour,
+	}))
+	// r.Use(cors.Default())
 	// // セッションCookieの設定
 	// store := cookie.NewStore([]byte("secret"))
 	// store.Options(sessions.Options{
