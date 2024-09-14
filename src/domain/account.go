@@ -6,6 +6,7 @@ type Account struct {
 	ID       string `gorm:"primary_key"`
 	Name     string `gorm:"unique;not null"`
 	Password string `gorm:"not null"`
+	Group    string
 }
 
 type AccountRepository interface {
@@ -17,6 +18,7 @@ func NewAccount(
 	id string,
 	name string,
 	password string,
+	group string,
 ) (Account, error) {
 	// パスワードをハッシュ化
 	hash_pass, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
@@ -28,6 +30,7 @@ func NewAccount(
 		ID:       id,
 		Name:     name,
 		Password: string(hash_pass),
+		Group:    group,
 	}, nil
 }
 
