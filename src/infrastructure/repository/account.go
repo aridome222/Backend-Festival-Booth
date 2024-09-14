@@ -24,6 +24,14 @@ func (repo AccountRepository) Create(account domain.Account) (domain.Account, er
 	return account, nil
 }
 
+func (repo AccountRepository) Save(account domain.Account) (domain.Account, error) {
+	result := repo.db.Save(account)
+	if result.Error != nil {
+		return domain.Account{}, result.Error
+	}
+	return account, nil
+}
+
 func (repo AccountRepository) FindByName(name string) (domain.Account, error) {
 	var account domain.Account
 
