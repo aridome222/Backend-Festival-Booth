@@ -1,6 +1,8 @@
 package domain
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"golang.org/x/crypto/bcrypt"
+)
 
 type Account struct {
 	ID       string `gorm:"primary_key"`
@@ -36,6 +38,10 @@ func NewAccount(
 }
 
 func (account Account) IsValidPassword(password string) bool {
+	// fmt.Println(account.Password)
+	// fmt.Println(password)
 	err := bcrypt.CompareHashAndPassword([]byte(account.Password), []byte(password))
+	// fmt.Println(bcrypt.ErrMismatchedHashAndPassword)
+	// fmt.Println(bcrypt.ErrMismatchedHashAndPassword.Error())
 	return err != bcrypt.ErrMismatchedHashAndPassword
 }
