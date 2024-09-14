@@ -7,12 +7,13 @@ type SaveGroupUseCase struct {
 }
 
 type SaveGroupInputDTO struct {
-	Group string `json:"group"`
+	UserName string
+	Group    int `json:"group"`
 }
 
 type SaveGroupOutputDTO struct {
 	UserName string `json:"name"`
-	Group    string `json:"group"`
+	Group    int    `json:"group"`
 }
 
 func NewSaveGroupUseCase(repo domain.AccountRepository) SaveGroupUseCase {
