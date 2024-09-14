@@ -16,7 +16,8 @@ func AuthJWT() gin.HandlerFunc {
 		tokenString, err := ctx.Cookie("token")
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"error": errors.New("unauthorized").Error(),
+				"error":   errors.New("unauthorized").Error(),
+				"message": "cookieからjwtの取得に失敗",
 			})
 			ctx.Abort()
 			return
@@ -33,7 +34,8 @@ func AuthJWT() gin.HandlerFunc {
 
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"error": errors.New("unauthorized").Error(),
+				"error":   errors.New("unauthorized").Error(),
+				"message": "jwtの検証に失敗",
 			})
 			ctx.Abort()
 			return
@@ -43,7 +45,8 @@ func AuthJWT() gin.HandlerFunc {
 		userName, err := extractUserName(token)
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"error": errors.New("invalid token").Error(),
+				"error":   errors.New("invalid token").Error(),
+				"message": "トークンからユーザー名の取得に失敗",
 			})
 			ctx.Abort()
 			return
