@@ -5,7 +5,8 @@ import (
 )
 
 type GetProductListUseCase struct {
-	repo domain.ProductRepository
+	repo        domain.ProductRepository
+	accountRepo domain.AccountRepository
 }
 
 type GetProductListUseCaseInputDTO struct {
@@ -19,11 +20,16 @@ type GetProductListUseCaseOutputDTO struct {
 	UserName    string `json:"user_name"`
 	Url         string `json:"url"`
 	Description string `json:"description"`
+	Answer      int    `json:"answer"`
 }
 
-func NewGetProductListUseCase(repo domain.ProductRepository) GetProductListUseCase {
+func NewGetProductListUseCase(
+	repo domain.ProductRepository,
+	accountRepo domain.AccountRepository,
+) GetProductListUseCase {
 	return GetProductListUseCase{
-		repo: repo,
+		repo:        repo,
+		accountRepo: accountRepo,
 	}
 }
 
@@ -44,12 +50,18 @@ func (uc GetProductListUseCase) GetProductList(input GetProductListUseCaseInputD
 	outputSlice := []GetProductListUseCaseOutputDTO{}
 
 	for _, product := range products {
+		account, err := uc.accountRepo.FindByName(product.UserName)
+		if err != nil {
+			return nil, err
+		}
+
 		outputSlice = append(outputSlice, GetProductListUseCaseOutputDTO{
 			product.ID,
 			product.Title,
 			product.UserName,
 			product.Url,
 			product.Description,
+			account.Answer,
 		})
 	}
 

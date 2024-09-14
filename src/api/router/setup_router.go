@@ -33,7 +33,7 @@ func SetupRouter(db *gorm.DB) {
 	saveProductController := controller.NewSaveProductController(saveProductUseCase)
 
 	// get products
-	getProductListUseCase := usecase.NewGetProductListUseCase(productRepository)
+	getProductListUseCase := usecase.NewGetProductListUseCase(productRepository, accountRepository)
 	getProductListController := controller.NewGetProductListController(getProductListUseCase)
 
 	// get product/:user_name
@@ -46,7 +46,7 @@ func SetupRouter(db *gorm.DB) {
 	saveProfileController := controller.NewSaveProfileController(saveProfileUseCase)
 
 	// get profiles
-	getProfileListUseCase := usecase.NewGetProfileListUseCase(profileRepository)
+	getProfileListUseCase := usecase.NewGetProfileListUseCase(profileRepository, accountRepository)
 	getProfileListController := controller.NewGetProfileListController(getProfileListUseCase)
 
 	// get profile/:name
