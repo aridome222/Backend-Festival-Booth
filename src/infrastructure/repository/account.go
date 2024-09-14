@@ -25,7 +25,7 @@ func (repo AccountRepository) Create(account domain.Account) (domain.Account, er
 }
 
 func (repo AccountRepository) Save(account domain.Account) (domain.Account, error) {
-	result := repo.db.Save(account)
+	result := repo.db.Save(&account)
 	if result.Error != nil {
 		return domain.Account{}, result.Error
 	}
