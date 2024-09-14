@@ -58,7 +58,8 @@ func (con LoginController) Login(ctx *gin.Context) {
 	if product := os.Getenv(("PRODUCTION")); product == "" {
 		ctx.SetCookie("token", tokenString, 3600, "/", "localhost", false, true)
 	} else {
-		ctx.SetCookie("token", tokenString, 3600, "/", "https://frontend-festival-booth.vercel.app/", false, true)
+		// ctx.SetCookie("token", tokenString, 3600, "/", "frontend-festival-booth.vercel.app/", false, true)
+		ctx.SetCookie("token", tokenString, 3600, "/", "backend-festival-booth.onrender.com", false, true)
 	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"user_name": accountName,
