@@ -55,7 +55,11 @@ func (con LoginController) Login(ctx *gin.Context) {
 	}
 
 	// cookieにjwtをセット
-	ctx.SetCookie("token", tokenString, 3600, "/", "localhost", false, true)
+	if product := os.Getenv(("PRODUCTION")); product == "" {
+		ctx.SetCookie("token", tokenString, 3600, "/", "localhost", false, true)
+	} else {
+		ctx.SetCookie("token", tokenString, 3600, "/", "https://frontend-festival-booth.vercel.app/", false, true)
+	}
 	ctx.JSON(http.StatusOK, gin.H{
 		"user_name": accountName,
 	})
