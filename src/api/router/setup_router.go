@@ -1,6 +1,8 @@
 package router
 
 import (
+	"time"
+
 	"github.com/aridome222/Backend-Festival-Booth/api/controller"
 	"github.com/aridome222/Backend-Festival-Booth/api/middleware"
 	"github.com/aridome222/Backend-Festival-Booth/infrastructure/repository"
@@ -67,10 +69,19 @@ func SetupRouter(db *gorm.DB) {
 		AllowMethods: []string{
 			"POST",
 			"GET",
+			"OPTIONS",
 		},
 		// 許可するHTTPリクエストヘッダ一覧
 		AllowHeaders: []string{
+			"Access-Control-Allow-Credentials",
+			"Access-Control-Allow-Headers",
 			"Content-Type",
+			"Content-Length",
+			"Accept-Encoding",
+			"Authorization",
+			"accessToken",
+			"Set-Cookie",
+			"Cookie",
 		},
 		AllowOrigins: []string{
 			"http://localhost:5173",
@@ -78,11 +89,17 @@ func SetupRouter(db *gorm.DB) {
 		},
 		// cookieなどの情報を必要とするかどうか
 		AllowCredentials: true,
+		MaxAge:           24 * time.Hour,
 	}))
+	// r.Use(cors.Default())
+	// // セッションCookieの設定
+	// store := cookie.NewStore([]byte("secret"))
+	// store.Options(sessions.Options{
+	//    Secure:   false,
+	//    HttpOnly: false})
 
 	// ルーティングのグループ化
 	authRouter := r.Group("/", middleware.AuthJWT())
-
 	// /login
 	r.POST("/login", loginController.Login)
 	authRouter.GET("/login", controller.GetAccount)
