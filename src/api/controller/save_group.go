@@ -11,7 +11,7 @@ type SaveGroupController struct {
 	uc usecase.SaveGroupUseCase
 }
 
-func NewGroupController(uc usecase.SaveGroupUseCase) SaveGroupController {
+func NewSaveGroupController(uc usecase.SaveGroupUseCase) SaveGroupController {
 	return SaveGroupController{
 		uc: uc,
 	}
