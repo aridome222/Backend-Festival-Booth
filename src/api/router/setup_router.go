@@ -21,9 +21,9 @@ func SetupRouter(db *gorm.DB) {
 	loginUseCase := usecase.NewLoginUseCase(loginRepository)
 	loginController := controller.NewLoginController(loginUseCase)
 
-	// save group
-	saveGroupUseCase := usecase.NewSaveGroupUseCase(accountRepository)
-	saveGroupController := controller.NewSaveGroupController(saveGroupUseCase)
+	// save answer
+	saveAnswerUseCase := usecase.NewSaveAnswerUseCase(accountRepository)
+	saveAnswerController := controller.NewSaveAnswerController(saveAnswerUseCase)
 
 	// save product
 	productRepository := repository.NewProductRepository(db)
@@ -90,8 +90,8 @@ func SetupRouter(db *gorm.DB) {
 	// /accounts
 	r.POST("/accounts", createAccountController.CreateAccount)
 
-	// /groups
-	authRouter.POST("/groups", saveGroupController.SaveGroup)
+	// /answers
+	authRouter.POST("/answers", saveAnswerController.SaveAnswer)
 
 	// /profiles
 	authRouter.POST("/profiles", saveProfileController.SaveProfile)

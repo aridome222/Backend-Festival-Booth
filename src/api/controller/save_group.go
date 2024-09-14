@@ -7,18 +7,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type SaveGroupController struct {
-	uc usecase.SaveGroupUseCase
+type SaveAnswerController struct {
+	uc usecase.SaveAnswerUseCase
 }
 
-func NewSaveGroupController(uc usecase.SaveGroupUseCase) SaveGroupController {
-	return SaveGroupController{
+func NewSaveAnswerController(uc usecase.SaveAnswerUseCase) SaveAnswerController {
+	return SaveAnswerController{
 		uc: uc,
 	}
 }
 
-func (con SaveGroupController) SaveGroup(ctx *gin.Context) {
-	var input usecase.SaveGroupInputDTO
+func (con SaveAnswerController) SaveAnswer(ctx *gin.Context) {
+	var input usecase.SaveAnswerInputDTO
 
 	if err := ctx.ShouldBindJSON(&input); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -33,7 +33,7 @@ func (con SaveGroupController) SaveGroup(ctx *gin.Context) {
 	}
 	input.UserName = user_name.(string)
 
-	savedAccount, err := con.uc.SaveGroup(input)
+	savedAccount, err := con.uc.SaveAnswer(input)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

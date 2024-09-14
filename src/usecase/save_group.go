@@ -2,45 +2,45 @@ package usecase
 
 import "github.com/aridome222/Backend-Festival-Booth/domain"
 
-type SaveGroupUseCase struct {
+type SaveAnswerUseCase struct {
 	repo domain.AccountRepository
 }
 
-type SaveGroupInputDTO struct {
+type SaveAnswerInputDTO struct {
 	UserName string
-	Group    int `json:"group"`
+	Answer   int `json:"answer"`
 }
 
-type SaveGroupOutputDTO struct {
+type SaveAnswerOutputDTO struct {
 	UserName string `json:"name"`
-	Group    int    `json:"group"`
+	Answer   int    `json:"answer"`
 }
 
-func NewSaveGroupUseCase(repo domain.AccountRepository) SaveGroupUseCase {
-	return SaveGroupUseCase{
+func NewSaveAnswerUseCase(repo domain.AccountRepository) SaveAnswerUseCase {
+	return SaveAnswerUseCase{
 		repo: repo,
 	}
 }
 
-func (uc SaveGroupUseCase) SaveGroup(input SaveGroupInputDTO) (SaveGroupOutputDTO, error) {
+func (uc SaveAnswerUseCase) SaveAnswer(input SaveAnswerInputDTO) (SaveAnswerOutputDTO, error) {
 	account, err := uc.repo.FindByName(input.UserName)
 	// TODO: accountが見つからなかった場合以外のエラーハンドリングを記述
 	if err != nil {
-		return SaveGroupOutputDTO{}, err
+		return SaveAnswerOutputDTO{}, err
 	}
 
-	account, err = domain.NewAccount(account.ID, account.Name, account.Password, input.Group)
+	account, err = domain.NewAccount(account.ID, account.Name, account.Password, input.Answer)
 	if err != nil {
-		return SaveGroupOutputDTO{}, err
+		return SaveAnswerOutputDTO{}, err
 	}
 
 	account, err = uc.repo.Save(account)
 	if err != nil {
-		return SaveGroupOutputDTO{}, err
+		return SaveAnswerOutputDTO{}, err
 	}
 
-	return SaveGroupOutputDTO{
+	return SaveAnswerOutputDTO{
 		account.Name,
-		account.Group,
+		account.Answer,
 	}, nil
 }
