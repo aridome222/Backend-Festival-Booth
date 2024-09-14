@@ -11,6 +11,11 @@ import (
 )
 
 func SetupRouter(db *gorm.DB) {
+	// create account
+	accountRepository := repository.NewAccountRepository(db)
+	createAccountUseCase := usecase.NewCreateAccountUseCase(accountRepository)
+	createAccountController := controller.NewCreateAccountController(createAccountUseCase)
+
 	// get login
 	loginRepository := repository.NewAccountRepository(db)
 	loginUseCase := usecase.NewLoginUseCase(loginRepository)
@@ -18,7 +23,7 @@ func SetupRouter(db *gorm.DB) {
 
 	// save product
 	productRepository := repository.NewProductRepository(db)
-	saveProductUseCase := usecase.NewSaveProductUseCase(productRepository)
+	saveProductUseCase := usecase.NewSaveProductUseCase(productRepository, accountRepository)
 	saveProductController := controller.NewSaveProductController(saveProductUseCase)
 
 	// get products
@@ -31,7 +36,7 @@ func SetupRouter(db *gorm.DB) {
 
 	// save profile
 	profileRepository := repository.NewProfileRepository(db)
-	saveProfileUseCase := usecase.NewSaveProfileUseCase(profileRepository)
+	saveProfileUseCase := usecase.NewSaveProfileUseCase(profileRepository, accountRepository)
 	saveProfileController := controller.NewSaveProfileController(saveProfileUseCase)
 
 	// get profiles
@@ -44,17 +49,12 @@ func SetupRouter(db *gorm.DB) {
 
 	// save comment
 	commentRepository := repository.NewCommentRepository(db)
-	saveCommentUseCase := usecase.NewSaveCommentUseCase(commentRepository, productRepository)
+	saveCommentUseCase := usecase.NewSaveCommentUseCase(commentRepository, productRepository, accountRepository)
 	saveCommentController := controller.NewSaveCommentController(saveCommentUseCase)
 
 	// get comment
 	getCommentUseCase := usecase.NewGetCommentUseCase(commentRepository)
 	getCommentController := controller.NewGetCommentController(getCommentUseCase)
-
-	// create account
-	accountRepository := repository.NewAccountRepository(db)
-	createAccountUseCase := usecase.NewCreateAccountUseCase(accountRepository)
-	createAccountController := controller.NewCreateAccountController(createAccountUseCase)
 
 	r := gin.Default()
 	// TODO: cors設定を適宜調整
@@ -77,27 +77,27 @@ func SetupRouter(db *gorm.DB) {
 	}))
 
 	// ルーティングのグループ化
-	authRouter := r.Group("/auth", middleware.AuthJWT())
+	authRouter := r.Group("/", middleware.AuthJWT())
 
 	// /login
 	r.POST("/login", loginController.Login)
+	authRouter.GET("/login", controller.GetAccount)
 
 	// /accounts
 	r.POST("/accounts", createAccountController.CreateAccount)
-	authRouter.GET("/accounts", controller.GetAccount)
 
 	// /profiles
-	r.POST("/profiles", saveProfileController.SaveProfile)
+	authRouter.POST("/profiles", saveProfileController.SaveProfile)
 	r.GET("/profiles", getProfileListController.GetProfileList)
 	r.GET("/profiles/:name", getProfileController.GetProfile)
 
 	// /products
-	r.POST("/products", saveProductController.SaveProduct)
+	authRouter.POST("/products", saveProductController.SaveProduct)
 	r.GET("/products", getProductListController.GetProductList)
 	r.GET("/products/:user_name", getProductController.GetProduct)
 
 	// /comments
-	r.POST("/comments", saveCommentController.SaveComment)
+	authRouter.POST("/comments", saveCommentController.SaveComment)
 	r.GET("/comments/:product_id", getCommentController.GetComment)
 
 	// health check用

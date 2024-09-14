@@ -6,7 +6,8 @@ import (
 )
 
 type SaveProfileUsecase struct {
-	repo domain.ProfileRepository
+	repo        domain.ProfileRepository
+	accountRepo domain.AccountRepository
 }
 
 type SaveProfileInputDTO struct {
@@ -15,7 +16,7 @@ type SaveProfileInputDTO struct {
 	// IconNum      int    `json:"icon_num"`
 	// GithubUrl    string `json:"github_url"`
 	// XUrl         string `json:"x_url"`
-	Name         string `json:"name" binding:"required,min=1,max=20"`
+	Name         string
 	Introduction string `json:"introduction" binding:"required,min=1,max=200"`
 	IconNum      int    `json:"icon_num"`
 	GithubUrl    string `json:"github_url"`
@@ -31,13 +32,23 @@ type SaveProfileOutputDTO struct {
 	XUrl         string `json:"x_url"`
 }
 
-func NewSaveProfileUseCase(repo domain.ProfileRepository) SaveProfileUsecase {
+func NewSaveProfileUseCase(
+	repo domain.ProfileRepository,
+	accountRepo domain.AccountRepository,
+) SaveProfileUsecase {
 	return SaveProfileUsecase{
-		repo: repo,
+		repo:        repo,
+		accountRepo: accountRepo,
 	}
 }
 
 func (uc SaveProfileUsecase) SaveProfile(input SaveProfileInputDTO) (SaveProfileOutputDTO, error) {
+	_, err := uc.accountRepo.FindByName(input.Name)
+	// TODO: accountが見つからなかった場合以外のエラーハンドリングを記述
+	if err != nil {
+		return SaveProfileOutputDTO{}, err
+	}
+
 	profile, err := uc.repo.FindByUser(input.Name)
 	// TODO: レコードが何も見つからなった場合以外のエラーハンドリングを記述する
 	// if err != nil {
