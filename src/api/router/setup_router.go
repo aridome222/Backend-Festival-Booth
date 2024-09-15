@@ -73,15 +73,15 @@ func SetupRouter(db *gorm.DB) {
 		},
 		// 許可するHTTPリクエストヘッダ一覧
 		AllowHeaders: []string{
-			"Access-Control-Allow-Credentials",
+			// "Access-Control-Allow-Credentials",
 			// "Access-Control-Allow-Headers",
 			"Content-Type",
 			// "Content-Length",
 			// "Accept-Encoding",
 			// "Authorization",
 			// "accessToken",
-			// "Set-Cookie",
-			// "Cookie",
+			"Set-Cookie",
+			"Cookie",
 		},
 		AllowOrigins: []string{
 			"http://localhost:5173",
