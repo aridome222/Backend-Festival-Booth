@@ -13,7 +13,7 @@ import (
 func AuthJWT() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		// cookieからjwtを取得
-		tokenString, err := ctx.Cookie("token")
+		tokenString, err := ctx.Cookie("jwt")
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
 				"error":   errors.New("unauthorized").Error(),
