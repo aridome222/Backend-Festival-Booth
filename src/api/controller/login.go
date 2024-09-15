@@ -54,15 +54,21 @@ func (con LoginController) Login(ctx *gin.Context) {
 		return
 	}
 
+	cookie := new(http.Cookie)
+	cookie.Value = tokenString
+
+	ctx.SetSameSite((http.SameSiteNoneMode))
+
 	// cookieにjwtをセット
 	if product := os.Getenv(("PRODUCTION")); product == "" {
 		ctx.SetCookie("jwt", tokenString, 3600, "/", "localhost", false, true)
 	} else {
-		ctx.SetCookie("token", tokenString, 3600, "/", "frontend-festival-booth.vercel.app/", false, true)
 		ctx.SetCookie("jwt", tokenString, 3600, "/", "backend-festival-booth.onrender.com", true, true)
-		ctx.SetCookie("jwt2", tokenString, 3600, "/", "localhost", false, true)
+		ctx.SetCookie("token", tokenString, 3600, "/", "frontend-festival-booth.vercel.app/", true, true)
+		ctx.SetCookie("jwt2", tokenString, 3600, "/", "localhost", true, true)
+		ctx.SetCookie("jwtHttp", cookie.Value, 3600, "/", "backend-festival-booth.onrender.com", true, true)
 	}
-	ctx.SetCookie("test", "ok", 3000, "/", "backend-festival-booth.onrender.com", false, true)
+	ctx.SetCookie("test", "ok", 3000, "/", "backend-festival-booth.onrender.com", true, true)
 	ctx.JSON(http.StatusOK, gin.H{
 		"user_name": accountName,
 	})
