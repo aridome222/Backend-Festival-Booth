@@ -88,8 +88,8 @@ func SetupRouter(db *gorm.DB) {
 			"https://frontend-festival-booth.vercel.app",
 		},
 		// cookieなどの情報を必要とするかどうか
-		AllowCredentials: true,
-		MaxAge:           24 * time.Hour,
+		// AllowCredentials: true,
+		MaxAge: 24 * time.Hour,
 	}))
 	// r.Use(cors.Default())
 	// // セッションCookieの設定
