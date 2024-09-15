@@ -14,10 +14,14 @@ func AuthJWT() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		// cookieからjwtを取得
 		tokenString, err := ctx.Cookie("jwt")
+		jwt2, _ := ctx.Cookie("jwt2")
+		testtoken, _ := ctx.Cookie("test")
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"error":   errors.New("unauthorized").Error(),
-				"message": "cookieからjwtの取得に失敗",
+				"error":    errors.New("unauthorized").Error(),
+				"message":  tokenString,
+				"message1": jwt2,
+				"message2": testtoken,
 			})
 			ctx.Abort()
 			return
