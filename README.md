@@ -4,9 +4,9 @@
 
 本リポジトリは、技育祭などのオンラインフェスのサブブースとして機能する自己紹介、個人開発物とそのリンクを掲載し、ブースを出すことでエンジニアとつながれるWebアプリの、バックエンドのリポジトリである。
 
-発表スライドリンク: [KatLab_Online Festival Booth(OnFES) - Google スライド](https://docs.google.com/presentation/d/1iMzPGfuHGFE-4xP5HDIdzmaOzY39G8cRd-i6tG31mSw/edit#slide=id.p)
+**発表スライドリンク**: [KatLab_Online Festival Booth(OnFES) - Google スライド](https://docs.google.com/presentation/d/1iMzPGfuHGFE-4xP5HDIdzmaOzY39G8cRd-i6tG31mSw/edit#slide=id.p)
 
-フロントエンドのリポジトリ: [Frontend-Festival-Booth](https://github.com/YKhm20020/Frontend-Festival-Booth)
+**フロントエンドのリポジトリ**: [Frontend-Festival-Booth](https://github.com/YKhm20020/Frontend-Festival-Booth)
 
 Webアプリの機能や使い方などに関しては、上記のリポジトリのREADMEをご参考に。
 
